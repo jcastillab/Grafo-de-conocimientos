@@ -1,0 +1,986 @@
+{
+  "package_root": "C:\\Source\\conteo-rosas-portable-2026-10-08\\src\\conteo_rosas",
+  "modules": [
+    {
+      "id": "config_central",
+      "path": "config_central.py",
+      "subpaquete": "_root",
+      "loc": 172,
+      "shim": false
+    },
+    {
+      "id": "rutas",
+      "path": "rutas.py",
+      "subpaquete": "_root",
+      "loc": 16,
+      "shim": false
+    },
+    {
+      "id": "__root__",
+      "path": "__init__.py",
+      "subpaquete": "_root",
+      "loc": 2,
+      "shim": false
+    },
+    {
+      "id": "agregacion.conteo_mundo",
+      "path": "agregacion/conteo_mundo.py",
+      "subpaquete": "agregacion",
+      "loc": 533,
+      "shim": false
+    },
+    {
+      "id": "agregacion.estado_flujo",
+      "path": "agregacion/estado_flujo.py",
+      "subpaquete": "agregacion",
+      "loc": 134,
+      "shim": false
+    },
+    {
+      "id": "agregacion",
+      "path": "agregacion/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "cli.config",
+      "path": "cli/config.py",
+      "subpaquete": "cli",
+      "loc": 50,
+      "shim": false
+    },
+    {
+      "id": "cli.main",
+      "path": "cli/main.py",
+      "subpaquete": "cli",
+      "loc": 696,
+      "shim": false
+    },
+    {
+      "id": "cli",
+      "path": "cli/__init__.py",
+      "subpaquete": "_root",
+      "loc": 4,
+      "shim": false
+    },
+    {
+      "id": "cli.__main__",
+      "path": "cli/__main__.py",
+      "subpaquete": "cli",
+      "loc": 4,
+      "shim": false
+    },
+    {
+      "id": "comparacion.cli",
+      "path": "comparacion/cli.py",
+      "subpaquete": "comparacion",
+      "loc": 34,
+      "shim": false
+    },
+    {
+      "id": "comparacion.config",
+      "path": "comparacion/config.py",
+      "subpaquete": "comparacion",
+      "loc": 54,
+      "shim": false
+    },
+    {
+      "id": "comparacion.lectores",
+      "path": "comparacion/lectores.py",
+      "subpaquete": "comparacion",
+      "loc": 158,
+      "shim": false
+    },
+    {
+      "id": "comparacion.service",
+      "path": "comparacion/service.py",
+      "subpaquete": "comparacion",
+      "loc": 81,
+      "shim": false
+    },
+    {
+      "id": "comparacion",
+      "path": "comparacion/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "deteccion.filtro_cama",
+      "path": "deteccion/filtro_cama.py",
+      "subpaquete": "deteccion",
+      "loc": 109,
+      "shim": false
+    },
+    {
+      "id": "deteccion.pipeline",
+      "path": "deteccion/pipeline.py",
+      "subpaquete": "deteccion",
+      "loc": 214,
+      "shim": false
+    },
+    {
+      "id": "deteccion.workers",
+      "path": "deteccion/workers.py",
+      "subpaquete": "deteccion",
+      "loc": 144,
+      "shim": false
+    },
+    {
+      "id": "deteccion",
+      "path": "deteccion/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "distribucion.paquete",
+      "path": "distribucion/paquete.py",
+      "subpaquete": "distribucion",
+      "loc": 106,
+      "shim": false
+    },
+    {
+      "id": "distribucion",
+      "path": "distribucion/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "dominio.contratos_visual",
+      "path": "dominio/contratos_visual.py",
+      "subpaquete": "dominio",
+      "loc": 22,
+      "shim": false
+    },
+    {
+      "id": "dominio.fenologia",
+      "path": "dominio/fenologia.py",
+      "subpaquete": "dominio",
+      "loc": 21,
+      "shim": false
+    },
+    {
+      "id": "dominio.normalizacion",
+      "path": "dominio/normalizacion.py",
+      "subpaquete": "dominio",
+      "loc": 108,
+      "shim": false
+    },
+    {
+      "id": "dominio",
+      "path": "dominio/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "entrenamiento.operacional",
+      "path": "entrenamiento/operacional.py",
+      "subpaquete": "entrenamiento",
+      "loc": 47,
+      "shim": false
+    },
+    {
+      "id": "entrenamiento",
+      "path": "entrenamiento/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "ingesta.manifest",
+      "path": "ingesta/manifest.py",
+      "subpaquete": "ingesta",
+      "loc": 153,
+      "shim": false
+    },
+    {
+      "id": "ingesta.organizador",
+      "path": "ingesta/organizador.py",
+      "subpaquete": "ingesta",
+      "loc": 224,
+      "shim": false
+    },
+    {
+      "id": "ingesta.qc",
+      "path": "ingesta/qc.py",
+      "subpaquete": "ingesta",
+      "loc": 358,
+      "shim": false
+    },
+    {
+      "id": "ingesta",
+      "path": "ingesta/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "interfaces",
+      "path": "interfaces/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "pronostico.bundles",
+      "path": "pronostico/bundles.py",
+      "subpaquete": "pronostico",
+      "loc": 79,
+      "shim": false
+    },
+    {
+      "id": "pronostico.canonical",
+      "path": "pronostico/canonical.py",
+      "subpaquete": "pronostico",
+      "loc": 77,
+      "shim": false
+    },
+    {
+      "id": "pronostico.config",
+      "path": "pronostico/config.py",
+      "subpaquete": "pronostico",
+      "loc": 45,
+      "shim": false
+    },
+    {
+      "id": "pronostico.engine",
+      "path": "pronostico/engine.py",
+      "subpaquete": "pronostico",
+      "loc": 498,
+      "shim": false
+    },
+    {
+      "id": "pronostico.families",
+      "path": "pronostico/families.py",
+      "subpaquete": "pronostico",
+      "loc": 82,
+      "shim": false
+    },
+    {
+      "id": "pronostico.features",
+      "path": "pronostico/features.py",
+      "subpaquete": "pronostico",
+      "loc": 76,
+      "shim": false
+    },
+    {
+      "id": "pronostico.m3",
+      "path": "pronostico/m3.py",
+      "subpaquete": "pronostico",
+      "loc": 186,
+      "shim": false
+    },
+    {
+      "id": "pronostico.operational",
+      "path": "pronostico/operational.py",
+      "subpaquete": "pronostico",
+      "loc": 110,
+      "shim": false
+    },
+    {
+      "id": "pronostico.reales_resumen",
+      "path": "pronostico/reales_resumen.py",
+      "subpaquete": "pronostico",
+      "loc": 147,
+      "shim": false
+    },
+    {
+      "id": "pronostico.resumen",
+      "path": "pronostico/resumen.py",
+      "subpaquete": "pronostico",
+      "loc": 73,
+      "shim": false
+    },
+    {
+      "id": "pronostico.service",
+      "path": "pronostico/service.py",
+      "subpaquete": "pronostico",
+      "loc": 200,
+      "shim": false
+    },
+    {
+      "id": "pronostico",
+      "path": "pronostico/__init__.py",
+      "subpaquete": "_root",
+      "loc": 5,
+      "shim": false
+    },
+    {
+      "id": "proyeccion.reales",
+      "path": "proyeccion/reales.py",
+      "subpaquete": "proyeccion",
+      "loc": 175,
+      "shim": false
+    },
+    {
+      "id": "proyeccion",
+      "path": "proyeccion/__init__.py",
+      "subpaquete": "_root",
+      "loc": 4,
+      "shim": false
+    },
+    {
+      "id": "validacion.duplicados",
+      "path": "validacion/duplicados.py",
+      "subpaquete": "validacion",
+      "loc": 39,
+      "shim": false
+    },
+    {
+      "id": "validacion",
+      "path": "validacion/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.bundle",
+      "path": "pronostico/adaptadores/bundle.py",
+      "subpaquete": "pronostico",
+      "loc": 122,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.contracts",
+      "path": "pronostico/adaptadores/contracts.py",
+      "subpaquete": "pronostico",
+      "loc": 52,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.extrapolation",
+      "path": "pronostico/adaptadores/extrapolation.py",
+      "subpaquete": "pronostico",
+      "loc": 52,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.registry",
+      "path": "pronostico/adaptadores/registry.py",
+      "subpaquete": "pronostico",
+      "loc": 58,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores",
+      "path": "pronostico/adaptadores/__init__.py",
+      "subpaquete": "pronostico",
+      "loc": 37,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.bayes",
+      "path": "pronostico/modelos/bayes.py",
+      "subpaquete": "pronostico",
+      "loc": 225,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.climate",
+      "path": "pronostico/modelos/climate.py",
+      "subpaquete": "pronostico",
+      "loc": 102,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.m3",
+      "path": "pronostico/modelos/m3.py",
+      "subpaquete": "pronostico",
+      "loc": 215,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.operational",
+      "path": "pronostico/modelos/operational.py",
+      "subpaquete": "pronostico",
+      "loc": 252,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.p32",
+      "path": "pronostico/modelos/p32.py",
+      "subpaquete": "pronostico",
+      "loc": 151,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.pruning",
+      "path": "pronostico/modelos/pruning.py",
+      "subpaquete": "pronostico",
+      "loc": 80,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.selection",
+      "path": "pronostico/modelos/selection.py",
+      "subpaquete": "pronostico",
+      "loc": 31,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.semimarkov",
+      "path": "pronostico/modelos/semimarkov.py",
+      "subpaquete": "pronostico",
+      "loc": 127,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos.supervised",
+      "path": "pronostico/modelos/supervised.py",
+      "subpaquete": "pronostico",
+      "loc": 119,
+      "shim": false
+    },
+    {
+      "id": "pronostico.modelos",
+      "path": "pronostico/modelos/__init__.py",
+      "subpaquete": "pronostico",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.adapters.bayes",
+      "path": "pronostico/adaptadores/adapters/bayes.py",
+      "subpaquete": "pronostico",
+      "loc": 119,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.adapters.glm",
+      "path": "pronostico/adaptadores/adapters/glm.py",
+      "subpaquete": "pronostico",
+      "loc": 63,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.adapters.m3",
+      "path": "pronostico/adaptadores/adapters/m3.py",
+      "subpaquete": "pronostico",
+      "loc": 68,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.adapters.rf",
+      "path": "pronostico/adaptadores/adapters/rf.py",
+      "subpaquete": "pronostico",
+      "loc": 110,
+      "shim": false
+    },
+    {
+      "id": "pronostico.adaptadores.adapters",
+      "path": "pronostico/adaptadores/adapters/__init__.py",
+      "subpaquete": "pronostico",
+      "loc": 15,
+      "shim": false
+    },
+    {
+      "id": "interfaces.gui.organizar",
+      "path": "interfaces/gui/organizar.py",
+      "subpaquete": "interfaces",
+      "loc": 1178,
+      "shim": false
+    },
+    {
+      "id": "interfaces.gui.qc",
+      "path": "interfaces/gui/qc.py",
+      "subpaquete": "interfaces",
+      "loc": 320,
+      "shim": false
+    },
+    {
+      "id": "interfaces.gui.seleccion_lote",
+      "path": "interfaces/gui/seleccion_lote.py",
+      "subpaquete": "interfaces",
+      "loc": 280,
+      "shim": false
+    },
+    {
+      "id": "interfaces.gui",
+      "path": "interfaces/gui/__init__.py",
+      "subpaquete": "interfaces",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "entrenamiento.evaluation.metrics",
+      "path": "entrenamiento/evaluation/metrics.py",
+      "subpaquete": "entrenamiento",
+      "loc": 32,
+      "shim": false
+    },
+    {
+      "id": "entrenamiento.evaluation.split",
+      "path": "entrenamiento/evaluation/split.py",
+      "subpaquete": "entrenamiento",
+      "loc": 67,
+      "shim": false
+    },
+    {
+      "id": "entrenamiento.evaluation",
+      "path": "entrenamiento/evaluation/__init__.py",
+      "subpaquete": "entrenamiento",
+      "loc": 6,
+      "shim": false
+    },
+    {
+      "id": "deteccion.detector",
+      "path": "deteccion/detector/__init__.py",
+      "subpaquete": "deteccion",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "deteccion.scoring",
+      "path": "deteccion/scoring/__init__.py",
+      "subpaquete": "deteccion",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "modeling",
+      "path": "modeling",
+      "subpaquete": "_shim",
+      "loc": 0,
+      "shim": true,
+      "nota": "no resuelto estáticamente"
+    },
+    {
+      "id": "models",
+      "path": "models",
+      "subpaquete": "_shim",
+      "loc": 0,
+      "shim": true,
+      "nota": "no resuelto estáticamente"
+    }
+  ],
+  "edges": [
+    {
+      "from": "agregacion.estado_flujo",
+      "to": "dominio.normalizacion"
+    },
+    {
+      "from": "agregacion.estado_flujo",
+      "to": "proyeccion.reales"
+    },
+    {
+      "from": "cli",
+      "to": "cli.main"
+    },
+    {
+      "from": "cli.__main__",
+      "to": "cli.main"
+    },
+    {
+      "from": "cli.main",
+      "to": "__root__"
+    },
+    {
+      "from": "cli.main",
+      "to": "comparacion.config"
+    },
+    {
+      "from": "cli.main",
+      "to": "comparacion.service"
+    },
+    {
+      "from": "cli.main",
+      "to": "deteccion.filtro_cama"
+    },
+    {
+      "from": "cli.main",
+      "to": "deteccion.pipeline"
+    },
+    {
+      "from": "cli.main",
+      "to": "deteccion.workers"
+    },
+    {
+      "from": "cli.main",
+      "to": "ingesta.manifest"
+    },
+    {
+      "from": "cli.main",
+      "to": "ingesta.organizador"
+    },
+    {
+      "from": "cli.main",
+      "to": "ingesta.qc"
+    },
+    {
+      "from": "cli.main",
+      "to": "pronostico.service"
+    },
+    {
+      "from": "cli.main",
+      "to": "rutas"
+    },
+    {
+      "from": "comparacion.cli",
+      "to": "comparacion.config"
+    },
+    {
+      "from": "comparacion.cli",
+      "to": "comparacion.service"
+    },
+    {
+      "from": "comparacion.cli",
+      "to": "rutas"
+    },
+    {
+      "from": "comparacion.config",
+      "to": "pronostico.config"
+    },
+    {
+      "from": "comparacion.lectores",
+      "to": "comparacion.config"
+    },
+    {
+      "from": "comparacion.lectores",
+      "to": "dominio.contratos_visual"
+    },
+    {
+      "from": "comparacion.lectores",
+      "to": "pronostico.canonical"
+    },
+    {
+      "from": "comparacion.lectores",
+      "to": "pronostico.reales_resumen"
+    },
+    {
+      "from": "comparacion.service",
+      "to": "comparacion.config"
+    },
+    {
+      "from": "comparacion.service",
+      "to": "comparacion.lectores"
+    },
+    {
+      "from": "comparacion.service",
+      "to": "pronostico.bundles"
+    },
+    {
+      "from": "config_central",
+      "to": "rutas"
+    },
+    {
+      "from": "deteccion.pipeline",
+      "to": "agregacion.conteo_mundo"
+    },
+    {
+      "from": "deteccion.pipeline",
+      "to": "deteccion.filtro_cama"
+    },
+    {
+      "from": "deteccion.pipeline",
+      "to": "dominio.fenologia"
+    },
+    {
+      "from": "deteccion.workers",
+      "to": "deteccion.filtro_cama"
+    },
+    {
+      "from": "deteccion.workers",
+      "to": "deteccion.pipeline"
+    },
+    {
+      "from": "deteccion.workers",
+      "to": "ingesta.organizador"
+    },
+    {
+      "from": "deteccion.workers",
+      "to": "ingesta.qc"
+    },
+    {
+      "from": "distribucion.paquete",
+      "to": "pronostico.bundles"
+    },
+    {
+      "from": "distribucion.paquete",
+      "to": "pronostico.config"
+    },
+    {
+      "from": "entrenamiento.evaluation",
+      "to": "entrenamiento.evaluation.metrics"
+    },
+    {
+      "from": "entrenamiento.evaluation",
+      "to": "entrenamiento.evaluation.split"
+    },
+    {
+      "from": "entrenamiento.operacional",
+      "to": "pronostico.config"
+    },
+    {
+      "from": "entrenamiento.operacional",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "entrenamiento.operacional",
+      "to": "pronostico.modelos.operational"
+    },
+    {
+      "from": "entrenamiento.operacional",
+      "to": "pronostico.modelos.supervised"
+    },
+    {
+      "from": "ingesta.organizador",
+      "to": "ingesta.manifest"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "__root__"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "agregacion.estado_flujo"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "cli"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "deteccion.workers"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "ingesta.manifest"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "ingesta.organizador"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "interfaces.gui.seleccion_lote"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "pronostico.service"
+    },
+    {
+      "from": "interfaces.gui.organizar",
+      "to": "rutas"
+    },
+    {
+      "from": "interfaces.gui.qc",
+      "to": "ingesta.manifest"
+    },
+    {
+      "from": "interfaces.gui.qc",
+      "to": "ingesta.qc"
+    },
+    {
+      "from": "interfaces.gui.qc",
+      "to": "rutas"
+    },
+    {
+      "from": "interfaces.gui.seleccion_lote",
+      "to": "dominio.normalizacion"
+    },
+    {
+      "from": "pronostico",
+      "to": "pronostico.service"
+    },
+    {
+      "from": "pronostico.adaptadores",
+      "to": "pronostico.adaptadores.adapters"
+    },
+    {
+      "from": "pronostico.adaptadores",
+      "to": "pronostico.adaptadores.bundle"
+    },
+    {
+      "from": "pronostico.adaptadores",
+      "to": "pronostico.adaptadores.contracts"
+    },
+    {
+      "from": "pronostico.adaptadores",
+      "to": "pronostico.adaptadores.extrapolation"
+    },
+    {
+      "from": "pronostico.adaptadores",
+      "to": "pronostico.adaptadores.registry"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters",
+      "to": "pronostico.adaptadores.adapters.bayes"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters",
+      "to": "pronostico.adaptadores.adapters.glm"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters",
+      "to": "pronostico.adaptadores.adapters.m3"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters",
+      "to": "pronostico.adaptadores.adapters.rf"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.bayes",
+      "to": "pronostico.adaptadores.contracts"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.bayes",
+      "to": "pronostico.modelos.bayes"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.bayes",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.glm",
+      "to": "pronostico.adaptadores.adapters.rf"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.glm",
+      "to": "pronostico.adaptadores.contracts"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.m3",
+      "to": "pronostico.adaptadores.contracts"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.m3",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "pronostico.adaptadores.adapters.rf",
+      "to": "pronostico.adaptadores.contracts"
+    },
+    {
+      "from": "pronostico.adaptadores.bundle",
+      "to": "pronostico.adaptadores.contracts"
+    },
+    {
+      "from": "pronostico.adaptadores.registry",
+      "to": "pronostico.adaptadores.adapters"
+    },
+    {
+      "from": "pronostico.config",
+      "to": "rutas"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "dominio.contratos_visual"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.bundles"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.canonical"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.config"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.families"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.features"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.m3"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.operational"
+    },
+    {
+      "from": "pronostico.engine",
+      "to": "pronostico.resumen"
+    },
+    {
+      "from": "pronostico.families",
+      "to": "pronostico.adaptadores.bundle"
+    },
+    {
+      "from": "pronostico.families",
+      "to": "pronostico.config"
+    },
+    {
+      "from": "pronostico.features",
+      "to": "pronostico.m3"
+    },
+    {
+      "from": "pronostico.modelos.bayes",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "pronostico.modelos.operational",
+      "to": "pronostico.canonical"
+    },
+    {
+      "from": "pronostico.modelos.operational",
+      "to": "pronostico.modelos.supervised"
+    },
+    {
+      "from": "pronostico.modelos.p32",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "pronostico.modelos.pruning",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "pronostico.modelos.semimarkov",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "pronostico.modelos.supervised",
+      "to": "pronostico.modelos.m3"
+    },
+    {
+      "from": "pronostico.operational",
+      "to": "pronostico.canonical"
+    },
+    {
+      "from": "pronostico.reales_resumen",
+      "to": "pronostico.canonical"
+    },
+    {
+      "from": "pronostico.reales_resumen",
+      "to": "proyeccion.reales"
+    },
+    {
+      "from": "pronostico.resumen",
+      "to": "pronostico.config"
+    },
+    {
+      "from": "pronostico.service",
+      "to": "config_central"
+    },
+    {
+      "from": "pronostico.service",
+      "to": "pronostico.config"
+    },
+    {
+      "from": "pronostico.service",
+      "to": "pronostico.engine"
+    },
+    {
+      "from": "pronostico.service",
+      "to": "rutas"
+    },
+    {
+      "from": "proyeccion.reales",
+      "to": "dominio.normalizacion"
+    },
+    {
+      "from": "validacion.duplicados",
+      "to": "pronostico.bundles"
+    }
+  ]
+}

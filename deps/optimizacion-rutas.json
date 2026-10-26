@@ -1,0 +1,147 @@
+{
+  "package_root": "C:\\Source\\optimizacion rutas\\app",
+  "modules": [
+    {
+      "id": "__root__",
+      "path": "__init__.py",
+      "subpaquete": "_root",
+      "loc": 0,
+      "shim": false
+    },
+    {
+      "id": "api",
+      "path": "api/__init__.py",
+      "subpaquete": "_root",
+      "loc": 0,
+      "shim": false
+    },
+    {
+      "id": "core.config",
+      "path": "core/config.py",
+      "subpaquete": "core",
+      "loc": 25,
+      "shim": false
+    },
+    {
+      "id": "core",
+      "path": "core/__init__.py",
+      "subpaquete": "_root",
+      "loc": 0,
+      "shim": false
+    },
+    {
+      "id": "etl.build_tables",
+      "path": "etl/build_tables.py",
+      "subpaquete": "etl",
+      "loc": 326,
+      "shim": false
+    },
+    {
+      "id": "etl.export_csv",
+      "path": "etl/export_csv.py",
+      "subpaquete": "etl",
+      "loc": 26,
+      "shim": false
+    },
+    {
+      "id": "etl.load_master",
+      "path": "etl/load_master.py",
+      "subpaquete": "etl",
+      "loc": 72,
+      "shim": false
+    },
+    {
+      "id": "etl.normalize",
+      "path": "etl/normalize.py",
+      "subpaquete": "etl",
+      "loc": 94,
+      "shim": false
+    },
+    {
+      "id": "etl.reconcile_report",
+      "path": "etl/reconcile_report.py",
+      "subpaquete": "etl",
+      "loc": 42,
+      "shim": false
+    },
+    {
+      "id": "etl",
+      "path": "etl/__init__.py",
+      "subpaquete": "_root",
+      "loc": 0,
+      "shim": false
+    },
+    {
+      "id": "repository",
+      "path": "repository/__init__.py",
+      "subpaquete": "_root",
+      "loc": 0,
+      "shim": false
+    },
+    {
+      "id": "schemas",
+      "path": "schemas/__init__.py",
+      "subpaquete": "_root",
+      "loc": 0,
+      "shim": false
+    },
+    {
+      "id": "services.distancia",
+      "path": "services/distancia.py",
+      "subpaquete": "services",
+      "loc": 39,
+      "shim": false
+    },
+    {
+      "id": "services.orden_paradas",
+      "path": "services/orden_paradas.py",
+      "subpaquete": "services",
+      "loc": 63,
+      "shim": false
+    },
+    {
+      "id": "services.recorrido",
+      "path": "services/recorrido.py",
+      "subpaquete": "services",
+      "loc": 88,
+      "shim": false
+    },
+    {
+      "id": "services",
+      "path": "services/__init__.py",
+      "subpaquete": "_root",
+      "loc": 0,
+      "shim": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "etl.build_tables",
+      "to": "etl.load_master"
+    },
+    {
+      "from": "etl.build_tables",
+      "to": "etl.normalize"
+    },
+    {
+      "from": "etl.export_csv",
+      "to": "etl.build_tables"
+    },
+    {
+      "from": "etl.reconcile_report",
+      "to": "etl.build_tables"
+    },
+    {
+      "from": "services.orden_paradas",
+      "to": "services.distancia"
+    },
+    {
+      "from": "services.recorrido",
+      "to": "services.distancia"
+    },
+    {
+      "from": "services.recorrido",
+      "to": "services.orden_paradas"
+    }
+  ]
+}

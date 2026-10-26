@@ -1,0 +1,817 @@
+{
+  "package_root": "C:\\Source\\markov_v3\\src",
+  "modules": [
+    {
+      "id": "ablation_rf_m3",
+      "path": "ablation_rf_m3.py",
+      "subpaquete": "_root",
+      "loc": 80,
+      "shim": false
+    },
+    {
+      "id": "canonical",
+      "path": "canonical.py",
+      "subpaquete": "_root",
+      "loc": 345,
+      "shim": false
+    },
+    {
+      "id": "conteos_vs_cortes",
+      "path": "conteos_vs_cortes.py",
+      "subpaquete": "_root",
+      "loc": 238,
+      "shim": false
+    },
+    {
+      "id": "dashboard_streamlit",
+      "path": "dashboard_streamlit.py",
+      "subpaquete": "_root",
+      "loc": 1114,
+      "shim": false
+    },
+    {
+      "id": "dashboard_validation",
+      "path": "dashboard_validation.py",
+      "subpaquete": "_root",
+      "loc": 380,
+      "shim": false
+    },
+    {
+      "id": "diagnostico_modelos",
+      "path": "diagnostico_modelos.py",
+      "subpaquete": "_root",
+      "loc": 191,
+      "shim": false
+    },
+    {
+      "id": "entrenar_modelos_operacionales",
+      "path": "entrenar_modelos_operacionales.py",
+      "subpaquete": "_root",
+      "loc": 47,
+      "shim": false
+    },
+    {
+      "id": "evaluacion_entrada",
+      "path": "evaluacion_entrada.py",
+      "subpaquete": "_root",
+      "loc": 680,
+      "shim": false
+    },
+    {
+      "id": "evaluacion_hyperparametros",
+      "path": "evaluacion_hyperparametros.py",
+      "subpaquete": "_root",
+      "loc": 282,
+      "shim": false
+    },
+    {
+      "id": "evaluacion_rolling",
+      "path": "evaluacion_rolling.py",
+      "subpaquete": "_root",
+      "loc": 444,
+      "shim": false
+    },
+    {
+      "id": "evaluacion_vision_semanal",
+      "path": "evaluacion_vision_semanal.py",
+      "subpaquete": "_root",
+      "loc": 384,
+      "shim": false
+    },
+    {
+      "id": "fase0_auditoria",
+      "path": "fase0_auditoria.py",
+      "subpaquete": "_root",
+      "loc": 183,
+      "shim": false
+    },
+    {
+      "id": "fase0_contratos",
+      "path": "fase0_contratos.py",
+      "subpaquete": "_root",
+      "loc": 282,
+      "shim": false
+    },
+    {
+      "id": "fase1_pipeline",
+      "path": "fase1_pipeline.py",
+      "subpaquete": "_root",
+      "loc": 35,
+      "shim": false
+    },
+    {
+      "id": "fase2_m3",
+      "path": "fase2_m3.py",
+      "subpaquete": "_root",
+      "loc": 134,
+      "shim": false
+    },
+    {
+      "id": "fase3_p32",
+      "path": "fase3_p32.py",
+      "subpaquete": "_root",
+      "loc": 134,
+      "shim": false
+    },
+    {
+      "id": "fase4_podas",
+      "path": "fase4_podas.py",
+      "subpaquete": "_root",
+      "loc": 107,
+      "shim": false
+    },
+    {
+      "id": "fase5_clima",
+      "path": "fase5_clima.py",
+      "subpaquete": "_root",
+      "loc": 112,
+      "shim": false
+    },
+    {
+      "id": "fase6_supervisado",
+      "path": "fase6_supervisado.py",
+      "subpaquete": "_root",
+      "loc": 122,
+      "shim": false
+    },
+    {
+      "id": "fase7_bayes",
+      "path": "fase7_bayes.py",
+      "subpaquete": "_root",
+      "loc": 156,
+      "shim": false
+    },
+    {
+      "id": "fase8_comparacion",
+      "path": "fase8_comparacion.py",
+      "subpaquete": "_root",
+      "loc": 99,
+      "shim": false
+    },
+    {
+      "id": "presentacion_ejecutiva",
+      "path": "presentacion_ejecutiva.py",
+      "subpaquete": "_root",
+      "loc": 672,
+      "shim": false
+    },
+    {
+      "id": "proyeccion_vision",
+      "path": "proyeccion_vision.py",
+      "subpaquete": "_root",
+      "loc": 671,
+      "shim": false
+    },
+    {
+      "id": "reporte_excel",
+      "path": "reporte_excel.py",
+      "subpaquete": "_root",
+      "loc": 383,
+      "shim": false
+    },
+    {
+      "id": "__root__",
+      "path": "__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "evaluation.metrics",
+      "path": "evaluation/metrics.py",
+      "subpaquete": "evaluation",
+      "loc": 23,
+      "shim": false
+    },
+    {
+      "id": "evaluation.split",
+      "path": "evaluation/split.py",
+      "subpaquete": "evaluation",
+      "loc": 57,
+      "shim": false
+    },
+    {
+      "id": "evaluation",
+      "path": "evaluation/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "modeling.bundle",
+      "path": "modeling/bundle.py",
+      "subpaquete": "modeling",
+      "loc": 122,
+      "shim": false
+    },
+    {
+      "id": "modeling.contracts",
+      "path": "modeling/contracts.py",
+      "subpaquete": "modeling",
+      "loc": 52,
+      "shim": false
+    },
+    {
+      "id": "modeling.extrapolation",
+      "path": "modeling/extrapolation.py",
+      "subpaquete": "modeling",
+      "loc": 52,
+      "shim": false
+    },
+    {
+      "id": "modeling.registry",
+      "path": "modeling/registry.py",
+      "subpaquete": "modeling",
+      "loc": 58,
+      "shim": false
+    },
+    {
+      "id": "modeling",
+      "path": "modeling/__init__.py",
+      "subpaquete": "_root",
+      "loc": 37,
+      "shim": false
+    },
+    {
+      "id": "models.bayes",
+      "path": "models/bayes.py",
+      "subpaquete": "models",
+      "loc": 228,
+      "shim": false
+    },
+    {
+      "id": "models.climate",
+      "path": "models/climate.py",
+      "subpaquete": "models",
+      "loc": 102,
+      "shim": false
+    },
+    {
+      "id": "models.m3",
+      "path": "models/m3.py",
+      "subpaquete": "models",
+      "loc": 215,
+      "shim": false
+    },
+    {
+      "id": "models.operational",
+      "path": "models/operational.py",
+      "subpaquete": "models",
+      "loc": 256,
+      "shim": false
+    },
+    {
+      "id": "models.p32",
+      "path": "models/p32.py",
+      "subpaquete": "models",
+      "loc": 151,
+      "shim": false
+    },
+    {
+      "id": "models.pruning",
+      "path": "models/pruning.py",
+      "subpaquete": "models",
+      "loc": 83,
+      "shim": false
+    },
+    {
+      "id": "models.selection",
+      "path": "models/selection.py",
+      "subpaquete": "models",
+      "loc": 31,
+      "shim": false
+    },
+    {
+      "id": "models.semimarkov",
+      "path": "models/semimarkov.py",
+      "subpaquete": "models",
+      "loc": 127,
+      "shim": false
+    },
+    {
+      "id": "models.supervised",
+      "path": "models/supervised.py",
+      "subpaquete": "models",
+      "loc": 158,
+      "shim": false
+    },
+    {
+      "id": "models",
+      "path": "models/__init__.py",
+      "subpaquete": "_root",
+      "loc": 1,
+      "shim": false
+    },
+    {
+      "id": "training.orchestration",
+      "path": "training/orchestration.py",
+      "subpaquete": "training",
+      "loc": 99,
+      "shim": false
+    },
+    {
+      "id": "training",
+      "path": "training/__init__.py",
+      "subpaquete": "_root",
+      "loc": 5,
+      "shim": false
+    },
+    {
+      "id": "modeling.adapters.bayes",
+      "path": "modeling/adapters/bayes.py",
+      "subpaquete": "modeling",
+      "loc": 119,
+      "shim": false
+    },
+    {
+      "id": "modeling.adapters.glm",
+      "path": "modeling/adapters/glm.py",
+      "subpaquete": "modeling",
+      "loc": 78,
+      "shim": false
+    },
+    {
+      "id": "modeling.adapters.m3",
+      "path": "modeling/adapters/m3.py",
+      "subpaquete": "modeling",
+      "loc": 68,
+      "shim": false
+    },
+    {
+      "id": "modeling.adapters.rf",
+      "path": "modeling/adapters/rf.py",
+      "subpaquete": "modeling",
+      "loc": 110,
+      "shim": false
+    },
+    {
+      "id": "modeling.adapters",
+      "path": "modeling/adapters/__init__.py",
+      "subpaquete": "modeling",
+      "loc": 15,
+      "shim": false
+    }
+  ],
+  "edges": [
+    {
+      "from": "ablation_rf_m3",
+      "to": "canonical"
+    },
+    {
+      "from": "ablation_rf_m3",
+      "to": "diagnostico_modelos"
+    },
+    {
+      "from": "ablation_rf_m3",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "ablation_rf_m3",
+      "to": "models.supervised"
+    },
+    {
+      "from": "conteos_vs_cortes",
+      "to": "canonical"
+    },
+    {
+      "from": "conteos_vs_cortes",
+      "to": "proyeccion_vision"
+    },
+    {
+      "from": "dashboard_streamlit",
+      "to": "canonical"
+    },
+    {
+      "from": "dashboard_streamlit",
+      "to": "dashboard_validation"
+    },
+    {
+      "from": "dashboard_streamlit",
+      "to": "evaluacion_entrada"
+    },
+    {
+      "from": "dashboard_streamlit",
+      "to": "reporte_excel"
+    },
+    {
+      "from": "dashboard_validation",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "diagnostico_modelos",
+      "to": "canonical"
+    },
+    {
+      "from": "diagnostico_modelos",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "diagnostico_modelos",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "diagnostico_modelos",
+      "to": "models.supervised"
+    },
+    {
+      "from": "entrenar_modelos_operacionales",
+      "to": "canonical"
+    },
+    {
+      "from": "entrenar_modelos_operacionales",
+      "to": "models.m3"
+    },
+    {
+      "from": "entrenar_modelos_operacionales",
+      "to": "models.operational"
+    },
+    {
+      "from": "entrenar_modelos_operacionales",
+      "to": "models.supervised"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "canonical"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "modeling.extrapolation"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "models.bayes"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "models.m3"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "models.selection"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "models.supervised"
+    },
+    {
+      "from": "evaluacion_entrada",
+      "to": "proyeccion_vision"
+    },
+    {
+      "from": "evaluacion_hyperparametros",
+      "to": "canonical"
+    },
+    {
+      "from": "evaluacion_hyperparametros",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "evaluacion_hyperparametros",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "evaluacion_hyperparametros",
+      "to": "models.supervised"
+    },
+    {
+      "from": "evaluacion_rolling",
+      "to": "canonical"
+    },
+    {
+      "from": "evaluacion_rolling",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "evaluacion_rolling",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "evaluacion_rolling",
+      "to": "models.bayes"
+    },
+    {
+      "from": "evaluacion_rolling",
+      "to": "models.m3"
+    },
+    {
+      "from": "evaluacion_rolling",
+      "to": "models.selection"
+    },
+    {
+      "from": "evaluacion_rolling",
+      "to": "models.supervised"
+    },
+    {
+      "from": "evaluacion_vision_semanal",
+      "to": "canonical"
+    },
+    {
+      "from": "evaluacion_vision_semanal",
+      "to": "models.bayes"
+    },
+    {
+      "from": "evaluacion_vision_semanal",
+      "to": "models.m3"
+    },
+    {
+      "from": "evaluacion_vision_semanal",
+      "to": "models.operational"
+    },
+    {
+      "from": "evaluacion_vision_semanal",
+      "to": "models.selection"
+    },
+    {
+      "from": "evaluacion_vision_semanal",
+      "to": "models.supervised"
+    },
+    {
+      "from": "evaluacion_vision_semanal",
+      "to": "proyeccion_vision"
+    },
+    {
+      "from": "fase0_auditoria",
+      "to": "canonical"
+    },
+    {
+      "from": "fase0_contratos",
+      "to": "canonical"
+    },
+    {
+      "from": "fase1_pipeline",
+      "to": "canonical"
+    },
+    {
+      "from": "fase2_m3",
+      "to": "canonical"
+    },
+    {
+      "from": "fase2_m3",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "fase2_m3",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "fase2_m3",
+      "to": "models.m3"
+    },
+    {
+      "from": "fase3_p32",
+      "to": "canonical"
+    },
+    {
+      "from": "fase3_p32",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "fase3_p32",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "fase3_p32",
+      "to": "models.m3"
+    },
+    {
+      "from": "fase3_p32",
+      "to": "models.p32"
+    },
+    {
+      "from": "fase3_p32",
+      "to": "models.semimarkov"
+    },
+    {
+      "from": "fase4_podas",
+      "to": "canonical"
+    },
+    {
+      "from": "fase4_podas",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "fase4_podas",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "fase4_podas",
+      "to": "models.m3"
+    },
+    {
+      "from": "fase4_podas",
+      "to": "models.pruning"
+    },
+    {
+      "from": "fase5_clima",
+      "to": "canonical"
+    },
+    {
+      "from": "fase5_clima",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "fase5_clima",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "fase5_clima",
+      "to": "models.climate"
+    },
+    {
+      "from": "fase5_clima",
+      "to": "models.m3"
+    },
+    {
+      "from": "fase6_supervisado",
+      "to": "canonical"
+    },
+    {
+      "from": "fase6_supervisado",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "fase6_supervisado",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "fase6_supervisado",
+      "to": "models.m3"
+    },
+    {
+      "from": "fase6_supervisado",
+      "to": "models.supervised"
+    },
+    {
+      "from": "fase7_bayes",
+      "to": "canonical"
+    },
+    {
+      "from": "fase7_bayes",
+      "to": "evaluation.metrics"
+    },
+    {
+      "from": "fase7_bayes",
+      "to": "evaluation.split"
+    },
+    {
+      "from": "fase7_bayes",
+      "to": "models.bayes"
+    },
+    {
+      "from": "fase7_bayes",
+      "to": "models.m3"
+    },
+    {
+      "from": "modeling",
+      "to": "modeling.adapters"
+    },
+    {
+      "from": "modeling",
+      "to": "modeling.bundle"
+    },
+    {
+      "from": "modeling",
+      "to": "modeling.contracts"
+    },
+    {
+      "from": "modeling",
+      "to": "modeling.extrapolation"
+    },
+    {
+      "from": "modeling",
+      "to": "modeling.registry"
+    },
+    {
+      "from": "modeling.adapters",
+      "to": "modeling.adapters.bayes"
+    },
+    {
+      "from": "modeling.adapters",
+      "to": "modeling.adapters.glm"
+    },
+    {
+      "from": "modeling.adapters",
+      "to": "modeling.adapters.m3"
+    },
+    {
+      "from": "modeling.adapters",
+      "to": "modeling.adapters.rf"
+    },
+    {
+      "from": "modeling.adapters.bayes",
+      "to": "modeling.contracts"
+    },
+    {
+      "from": "modeling.adapters.bayes",
+      "to": "models.bayes"
+    },
+    {
+      "from": "modeling.adapters.bayes",
+      "to": "models.m3"
+    },
+    {
+      "from": "modeling.adapters.glm",
+      "to": "modeling.adapters.rf"
+    },
+    {
+      "from": "modeling.adapters.glm",
+      "to": "modeling.contracts"
+    },
+    {
+      "from": "modeling.adapters.glm",
+      "to": "models.supervised"
+    },
+    {
+      "from": "modeling.adapters.m3",
+      "to": "modeling.contracts"
+    },
+    {
+      "from": "modeling.adapters.m3",
+      "to": "models.m3"
+    },
+    {
+      "from": "modeling.adapters.rf",
+      "to": "modeling.contracts"
+    },
+    {
+      "from": "modeling.bundle",
+      "to": "modeling.contracts"
+    },
+    {
+      "from": "modeling.registry",
+      "to": "modeling.adapters"
+    },
+    {
+      "from": "models.bayes",
+      "to": "models.m3"
+    },
+    {
+      "from": "models.operational",
+      "to": "canonical"
+    },
+    {
+      "from": "models.operational",
+      "to": "models.supervised"
+    },
+    {
+      "from": "models.p32",
+      "to": "models.m3"
+    },
+    {
+      "from": "models.pruning",
+      "to": "models.m3"
+    },
+    {
+      "from": "models.semimarkov",
+      "to": "models.m3"
+    },
+    {
+      "from": "models.supervised",
+      "to": "models.m3"
+    },
+    {
+      "from": "presentacion_ejecutiva",
+      "to": "canonical"
+    },
+    {
+      "from": "presentacion_ejecutiva",
+      "to": "models.bayes"
+    },
+    {
+      "from": "presentacion_ejecutiva",
+      "to": "models.supervised"
+    },
+    {
+      "from": "proyeccion_vision",
+      "to": "canonical"
+    },
+    {
+      "from": "proyeccion_vision",
+      "to": "modeling"
+    },
+    {
+      "from": "proyeccion_vision",
+      "to": "models.m3"
+    },
+    {
+      "from": "proyeccion_vision",
+      "to": "models.operational"
+    },
+    {
+      "from": "proyeccion_vision",
+      "to": "models.supervised"
+    },
+    {
+      "from": "reporte_excel",
+      "to": "canonical"
+    },
+    {
+      "from": "training",
+      "to": "training.orchestration"
+    }
+  ]
+}
