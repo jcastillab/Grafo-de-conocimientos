@@ -1,11 +1,11 @@
-# Grafo de conocimiento — C:\Source
+# Grafo de conocimiento — fichas de referencia
 
-Índice de los proyectos en `C:\Source`. Cada fila enlaza al nodo completo en
-`.knowledge-graph/projects/<slug>.md` (frontmatter YAML + resumen). Lee el
-nodo del proyecto que te interese antes de explorar su carpeta desde cero.
+Este índice conserva las fichas de referencia incluidas en el repositorio; no
+define qué carpetas se escanean. `tools/generar_grafo.py [CARPETA_BASE]`
+descubre en tiempo de ejecución las subcarpetas directas de la carpeta indicada
+y las enriquece con una ficha cuando coincide su nombre.
 
-Mantenimiento: ver `CLAUDE.md` raíz y la skill `actualizar-grafo`. No se pide
-aparte — es parte del trabajo normal cuando aparece o cambia un proyecto.
+Para generar una visualización general, consulta `README.md`.
 
 | Proyecto | Estado | Stack | Nodo |
 |---|---|---|---|
@@ -29,4 +29,4 @@ de ambos nodos y aquí como una línea `A -> B: por qué`.
 
 No lo hagas a mano salvo caso simple: usa la skill `nuevo-proyecto` (plugin `equipo`), o el
 subagente `equipo:project-scout` si la carpeta ya existe y solo falta documentarla.
-Plantilla de nodo en `.knowledge-graph/projects/_template.md`.
+Plantilla de nodo en `projects/_template.md`.

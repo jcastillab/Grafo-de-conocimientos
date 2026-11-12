@@ -1,6 +1,6 @@
 ---
 name: <nombre-carpeta>
-path: C:\Source\<nombre-carpeta>
+path: <ruta-base>\<nombre-carpeta>
 stack: []
 tags: []
 status: new

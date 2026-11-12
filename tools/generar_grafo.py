@@ -1,29 +1,31 @@
-"""Genera grafo.html: visualización autocontenida del grafo de conocimiento.
+"""Genera una visualización autocontenida del grafo de conocimiento.
 
-No depende de Claude ni de la herramienta Artifact: lee los archivos del repo
-(graph.md no hace falta; usa projects/*.md y deps/*.json) y escribe un único
-HTML que se abre en cualquier navegador, sin internet.
+No depende de Claude ni de la herramienta Artifact: descubre las subcarpetas
+de una carpeta base y las enriquece con projects/*.md y deps/*.json opcionales.
+Escribe un único HTML que se abre en cualquier navegador, sin internet.
 
-Uso:  python tools/generar_grafo.py
-Salida: .knowledge-graph/grafo.html
+Uso:  python tools/generar_grafo.py [CARPETA_BASE] [--output grafo.html]
+Por defecto escanea la carpeta padre del repositorio y escribe allí grafo.html.
 
 Solo biblioteca estándar (no requiere PyYAML). El parser de frontmatter cubre
 el formato de los nodos del grafo: escalares, listas inline [a, b] y listas
 de objetos bajo `relationships:`.
 """
 
+import argparse
 import hashlib
+import html
 import json
 import math
 import random
 import re
 import sys
+import unicodedata
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
 PROJECTS = RAIZ / "projects"
 DEPS = RAIZ / "deps"
-SALIDA = RAIZ / "grafo.html"
 
 
 def _kv(texto):
@@ -68,15 +70,33 @@ def parse_secciones(cuerpo):
     return secciones
 
 
-def cargar_proyectos():
-    proyectos = {}
-    for md in sorted(PROJECTS.glob("*.md")):
+def normalizar(texto):
+    texto = unicodedata.normalize("NFKD", texto)
+    texto = "".join(c for c in texto if not unicodedata.combining(c))
+    return re.sub(r"[^a-z0-9]+", "", texto.lower())
+
+
+def cargar_proyectos(raiz, carpeta_projects):
+    """Descubre subcarpetas de primer nivel y enriquece las que tengan ficha."""
+    fichas = {}
+    for md in sorted(carpeta_projects.glob("*.md")):
         if md.stem.startswith("_"):
             continue
         fm, cuerpo = parse_frontmatter(md.read_text(encoding="utf-8"))
-        proyectos[md.stem] = {
-            "id": md.stem,
-            "name": fm.get("name", md.stem),
+        clave = normalizar(md.stem)
+        fichas[clave] = (md.stem, fm, cuerpo)
+        if fm.get("name"):
+            fichas.setdefault(normalizar(fm["name"]), (md.stem, fm, cuerpo))
+
+    proyectos = {}
+    for carpeta in sorted(raiz.iterdir(), key=lambda p: p.name.casefold()):
+        if not carpeta.is_dir() or carpeta.name.startswith(".") or carpeta.resolve() == RAIZ.resolve():
+            continue
+        ficha = fichas.get(normalizar(carpeta.name))
+        pid, fm, cuerpo = ficha if ficha else (carpeta.name, {}, "")
+        proyectos[pid] = {
+            "id": pid,
+            "name": fm.get("name", carpeta.name),
             "status": fm.get("status", "new"),
             "stack": fm.get("stack", []) if isinstance(fm.get("stack"), list) else [],
             "tags": fm.get("tags", []) if isinstance(fm.get("tags"), list) else [],
@@ -95,12 +115,15 @@ def resolver(ref, proyectos):
 
 
 def construir_aristas(proyectos):
-    aristas, vistas = [], set()
+    aristas, vistas, avisos = [], set(), set()
     for pid, p in proyectos.items():
         for r in p["relationships"]:
             destino = resolver(r.get("project"), proyectos)
             if destino is None:
-                print(f"aviso: {pid} referencia '{r.get('project')}' que no tiene nodo", file=sys.stderr)
+                aviso = (pid, r.get("project"))
+                if aviso not in avisos:
+                    print(f"aviso: {pid} referencia '{r.get('project')}' que no tiene nodo", file=sys.stderr)
+                    avisos.add(aviso)
                 continue
             clave = (frozenset((pid, destino)), r.get("tipo", ""))
             if clave in vistas:
@@ -161,10 +184,10 @@ def layout_fuerzas(ids, aristas, w=1000, h=700, iters=120):
     return pos
 
 
-def cargar_internos(proyectos):
+def cargar_internos(proyectos, carpeta_deps):
     internos, hashes = {}, {}
     for pid in proyectos:
-        archivo = DEPS / f"{pid}.json"
+        archivo = carpeta_deps / f"{pid}.json"
         if not archivo.exists():
             continue
         d = json.loads(archivo.read_text(encoding="utf-8"))
@@ -192,9 +215,26 @@ def cargar_internos(proyectos):
 
 
 def main():
-    proyectos = cargar_proyectos()
+    parser = argparse.ArgumentParser(
+        description="Genera un grafo a partir de las subcarpetas de una carpeta base."
+    )
+    parser.add_argument(
+        "root", nargs="?", type=Path, default=RAIZ.parent,
+        help=f"carpeta base que contiene los proyectos (predeterminada: {RAIZ.parent})",
+    )
+    parser.add_argument("--output", type=Path, help="archivo HTML de salida (predeterminado: <root>/grafo.html)")
+    parser.add_argument("--projects-dir", type=Path, default=PROJECTS,
+                        help="carpeta con fichas Markdown opcionales")
+    parser.add_argument("--deps-dir", type=Path, default=DEPS,
+                        help="carpeta con JSON de dependencias opcionales")
+    args = parser.parse_args()
+    raiz = args.root.resolve()
+    if not raiz.is_dir():
+        parser.error(f"no existe la carpeta base: {raiz}")
+    salida = (args.output or raiz / "grafo.html").resolve()
+    proyectos = cargar_proyectos(raiz, args.projects_dir.resolve())
     if not proyectos:
-        sys.exit("No hay nodos en projects/")
+        sys.exit(f"No se encontraron subcarpetas de proyecto en {raiz}")
     aristas = construir_aristas(proyectos)
     ids = list(proyectos)
     pos = layout_circular(ids)
@@ -210,12 +250,15 @@ def main():
     datos = {
         "nodos": nodos,
         "aristas": aristas,
-        "internos": cargar_internos(proyectos),
+        "internos": cargar_internos(proyectos, args.deps_dir.resolve()),
         "generado": "generado por tools/generar_grafo.py",
     }
     payload = json.dumps(datos, ensure_ascii=False).replace("</", "<\\/")
-    SALIDA.write_text(PLANTILLA.replace("__DATA__", payload), encoding="utf-8")
-    print(f"OK: {SALIDA} ({len(nodos)} proyectos, {len(aristas)} relaciones, "
+    salida.parent.mkdir(parents=True, exist_ok=True)
+    titulo = html.escape(str(raiz))
+    documento = PLANTILLA.replace("__TITLE__", titulo).replace("__DATA__", payload)
+    salida.write_text(documento, encoding="utf-8")
+    print(f"OK: {salida} ({len(nodos)} proyectos, {len(aristas)} relaciones, "
           f"{len(datos['internos'])} con vista interna)")
 
 
@@ -251,7 +294,7 @@ svg{width:100%;height:auto;display:block}
 </head>
 <body>
 <header>
-  <h1>Grafo de conocimiento — C:\Source</h1>
+  <h1>Grafo de conocimiento — __TITLE__</h1>
   <button id="btn-over">Overview</button>
   <span id="titulo-int" class="nota"></span>
 </header>
