@@ -1,7 +1,8 @@
 """Genera una visualización autocontenida del grafo de conocimiento.
 
-No depende de Claude ni de la herramienta Artifact: descubre las subcarpetas
-de una carpeta base y las enriquece con projects/*.md y deps/*.json opcionales.
+No depende de Claude ni de la herramienta Artifact: descubre únicamente las
+subcarpetas directas de una carpeta base. Los metadatos opcionales solo se
+cargan si se indican explícitamente por línea de comandos.
 Escribe un único HTML que se abre en cualquier navegador, sin internet.
 
 Uso:  python tools/generar_grafo.py [CARPETA_BASE] [--output grafo.html]
@@ -24,8 +25,6 @@ import unicodedata
 from pathlib import Path
 
 RAIZ = Path(__file__).resolve().parent.parent
-PROJECTS = RAIZ / "projects"
-DEPS = RAIZ / "deps"
 
 
 def _kv(texto):
@@ -76,17 +75,18 @@ def normalizar(texto):
     return re.sub(r"[^a-z0-9]+", "", texto.lower())
 
 
-def cargar_proyectos(raiz, carpeta_projects):
-    """Descubre subcarpetas de primer nivel y enriquece las que tengan ficha."""
+def cargar_proyectos(raiz, carpeta_projects=None):
+    """Descubre subcarpetas directas; lee fichas solo si se indican."""
     fichas = {}
-    for md in sorted(carpeta_projects.glob("*.md")):
-        if md.stem.startswith("_"):
-            continue
-        fm, cuerpo = parse_frontmatter(md.read_text(encoding="utf-8"))
-        clave = normalizar(md.stem)
-        fichas[clave] = (md.stem, fm, cuerpo)
-        if fm.get("name"):
-            fichas.setdefault(normalizar(fm["name"]), (md.stem, fm, cuerpo))
+    if carpeta_projects is not None:
+        for md in sorted(carpeta_projects.glob("*.md")):
+            if md.stem.startswith("_"):
+                continue
+            fm, cuerpo = parse_frontmatter(md.read_text(encoding="utf-8"))
+            clave = normalizar(md.stem)
+            fichas[clave] = (md.stem, fm, cuerpo)
+            if fm.get("name"):
+                fichas.setdefault(normalizar(fm["name"]), (md.stem, fm, cuerpo))
 
     proyectos = {}
     for carpeta in sorted(raiz.iterdir(), key=lambda p: p.name.casefold()):
@@ -191,8 +191,10 @@ def layout_fuerzas(ids, aristas, w=1000, h=700, iters=120):
     return pos
 
 
-def cargar_internos(proyectos, carpeta_deps):
+def cargar_internos(proyectos, carpeta_deps=None):
     internos, hashes = {}, {}
+    if carpeta_deps is None:
+        return internos
     for pid in proyectos:
         archivo = carpeta_deps / f"{pid}.json"
         if not archivo.exists():
@@ -230,16 +232,16 @@ def main():
         help=f"carpeta base que contiene los proyectos (predeterminada: {RAIZ.parent})",
     )
     parser.add_argument("--output", type=Path, help="archivo HTML de salida (predeterminado: <root>/grafo.html)")
-    parser.add_argument("--projects-dir", type=Path, default=PROJECTS,
-                        help="carpeta con fichas Markdown opcionales")
-    parser.add_argument("--deps-dir", type=Path, default=DEPS,
-                        help="carpeta con JSON de dependencias opcionales")
+    parser.add_argument("--projects-dir", type=Path,
+                        help="carpeta con fichas Markdown (solo se carga si se indica)")
+    parser.add_argument("--deps-dir", type=Path,
+                        help="carpeta con JSON de dependencias (solo se carga si se indica)")
     args = parser.parse_args()
     raiz = args.root.resolve()
     if not raiz.is_dir():
         parser.error(f"no existe la carpeta base: {raiz}")
     salida = (args.output or raiz / "grafo.html").resolve()
-    proyectos = cargar_proyectos(raiz, args.projects_dir.resolve())
+    proyectos = cargar_proyectos(raiz, args.projects_dir.resolve() if args.projects_dir else None)
     if not proyectos:
         sys.exit(f"No se encontraron subcarpetas de proyecto en {raiz}")
     aristas = construir_aristas(proyectos)
@@ -257,7 +259,7 @@ def main():
     datos = {
         "nodos": nodos,
         "aristas": aristas,
-        "internos": cargar_internos(proyectos, args.deps_dir.resolve()),
+        "internos": cargar_internos(proyectos, args.deps_dir.resolve() if args.deps_dir else None),
         "generado": "generado por tools/generar_grafo.py",
     }
     payload = json.dumps(datos, ensure_ascii=False).replace("</", "<\\/")
