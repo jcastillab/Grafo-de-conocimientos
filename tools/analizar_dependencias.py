@@ -29,6 +29,12 @@ import json
 import sys
 from pathlib import Path
 
+DIRECTORIOS_IGNORADOS = {
+    ".git", ".hg", ".svn", ".venv", "venv", "env", "node_modules",
+    "__pycache__", ".pytest_cache", ".mypy_cache", ".ruff_cache", ".tox",
+    ".cache", "site-packages", "dist", "build",
+}
+
 
 def module_id_for(path: Path, root: Path) -> str:
     rel = path.relative_to(root).with_suffix("")
@@ -48,6 +54,8 @@ def package_of(module_id: str, is_package: bool) -> str:
 def build_registry(root: Path) -> dict[str, dict]:
     registry: dict[str, dict] = {}
     for py_file in root.rglob("*.py"):
+        if any(part.lower() in DIRECTORIOS_IGNORADOS for part in py_file.relative_to(root).parts[:-1]):
+            continue
         mid = module_id_for(py_file, root)
         is_pkg = py_file.name == "__init__.py"
         try:
