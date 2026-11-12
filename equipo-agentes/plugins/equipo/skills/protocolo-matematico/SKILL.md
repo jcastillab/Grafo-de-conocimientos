@@ -5,11 +5,9 @@ description: Checklist compartida de rigor numérico/estadístico (baseline, ant
 
 # Protocolo de rigor matemático
 
-Checklist compartida para proyectos de modelado estadístico/ML/DL u
-optimización numérica bajo `C:\Source`. Generaliza lo que `markov_v3` ya
-probó en la práctica (ver `markov_v3/AGENTS.md` como ejemplo vivo completo)
-en una lista de verificación reutilizable para cualquier proyecto nuevo del
-mismo tipo.
+Checklist reutilizable para proyectos de modelado estadístico/ML/DL u
+optimización numérica. Aplícala según el dominio y los criterios del proyecto
+que se esté revisando; no presupone una estructura ni un ejemplo externo.
 
 Esta checklist es para **auditoría externa** (lo que usa el subagente
 `rigor-numerico-scout`), no reemplaza el `AGENTS.md` propio de cada

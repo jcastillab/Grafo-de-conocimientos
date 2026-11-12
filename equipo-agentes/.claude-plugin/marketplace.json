@@ -7,11 +7,11 @@
     {
       "name": "equipo",
       "source": "./plugins/equipo",
-      "description": "Equipo de agentes para C:/Source: bucle de desarrollo verificable, documentación estilo manual Sunshine, rigor numérico y grafo de conocimiento.",
+       "description": "Método de desarrollo verificable, documentación, revisión de rigor y utilidades de grafo.",
       "version": "0.1.0"
     }
   ],
   "metadata": {
-    "description": "Plugins de trabajo para los proyectos de C:/Source."
+    "description": "Plugins para aplicar flujos de trabajo a proyectos seleccionados por la persona usuaria."
   }
 }

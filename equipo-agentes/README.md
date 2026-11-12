@@ -1,96 +1,52 @@
-<img src="plugins/equipo/skills/estilo-documentacion/img/logo_sunshine_bouquet.png" alt="Sunshine Bouquet" width="240">
-
 # Equipo de agentes — método portable e integración Claude Code
 
-> **Para quién es:** equipos que quieran aplicar el mismo flujo de desarrollo
-> desde distintos agentes de programación.
-> **Qué hace:** define un método portable y conserva, además, una integración
-> opcional para Claude Code.
->
-> Última revisión: 2026-11-12.
+Este directorio separa el método general de las integraciones de plataforma.
+Las instrucciones describen procedimientos; no contienen inventarios ni
+supuestos sobre las carpetas de un usuario.
 
----
-
-## 0. Método portable (cualquier agente)
+## Método portable
 
 Lee [`FLUJO-PORTABLE.md`](FLUJO-PORTABLE.md) para aplicar el ciclo de trabajo
-sin depender de comandos, hooks o capacidades particulares. En este repositorio,
-`../AGENTS.md` sirve como punto de entrada para herramientas que reconocen ese
-formato. En otra plataforma, indica al agente que lea ambos documentos usando la
-plantilla del flujo.
+desde cualquier agente. En este repositorio, `../AGENTS.md` es el punto de
+entrada para herramientas que reconocen ese formato. En otra herramienta,
+indícale que lea ambos documentos y siga la plantilla de solicitud del flujo.
 
-El flujo contempla exploración, criterios de aceptación, pruebas, implementación
-acotada, revisión, documentación y commits pequeños. Delegar en los perfiles de
-`plugins/equipo/agents/` es opcional; sus documentos también pueden leerse como
-guías de rol por un agente que no admita subagentes.
+Los perfiles y skills bajo `plugins/equipo/` son guías procedimentales. Úsalos
+solo cuando la tarea lo requiera y basa cualquier dato factual en el proyecto
+seleccionado por la persona usuaria.
 
-## 1. Integración opcional: Claude Code
+## Integración opcional: Claude Code
 
-La carpeta `plugins/equipo/` mantiene la integración nativa para Claude Code:
+`plugins/equipo/` conserva los formatos propios de Claude Code: agentes, skills,
+comandos y hooks. Esos mecanismos son opcionales; el método portable no depende
+de que estén disponibles.
 
-1. **Un método de trabajo** (`/desarrollar`): cada cambio pasa por plan → tests que fallan → implementación → revisión en paralelo → documentación → commit.
-2. **Un equipo** de agentes especializados que el método llama solos.
-3. **Guardarraíles** (hooks) que no dejan terminar con tests rojos y formatean el código.
+Para instalar el plugin en Claude Code:
 
-Vive en un repo propio para que funcione **en cualquier proyecto y en cualquier worktree** (lo que está en `C:\Source\.claude` deja de verse en cuanto un proyecto tiene su propio git).
-
-### El equipo
-
-| Agente | Qué hace |
-|---|---|
-| `escritor-tests` | Escribe los tests desde los criterios de aceptación y confirma que fallan por la razón correcta. Solo toca `tests/`. |
-| `documentador` | Manuales de usuario/administrador con el estilo de Conteo Rosas: paso a paso, paleta Sunshine, capturas con marcas numeradas. |
-| `rigor-numerico-scout` | Audita baseline, leakage, métrica, reproducibilidad (solo lee). |
-| `project-scout` | Mantiene el nodo del proyecto en el grafo de conocimiento. |
-
-Además usa los integrados `Explore`, `Plan` y la skill `code-review`.
-
-### Las skills
-
-| Skill | Para qué |
-|---|---|
-| `/desarrollar <tarea>` | El ciclo completo de una tarea. |
-| `/preparar-proyecto <carpeta>` | Incorpora un proyecto: git, `.gitignore`, `AGENTS.md` + `CLAUDE.md`, deps de desarrollo, permisos, commit inicial. |
-| `/documentar <proyecto> [usuario\|admin\|readme]` | Manuales vía el `documentador`. |
-| `/revisar-rigor-matematico` | Auditoría de rigor. |
-| `/nuevo-proyecto`, `/actualizar-grafo`, `/ver-grafo`, `/profundizar-proyecto` | Grafo de conocimiento de `C:\Source`. |
-| `protocolo-matematico`, `estilo-documentacion` | Conocimiento de referencia que precargan los agentes. |
-
----
-
-### Instalar (una vez por PC)
+Sustituye el marcador por la ruta local real de este directorio.
 
 ```powershell
-claude plugin marketplace add C:\Source\equipo-agentes
+claude plugin marketplace add <ruta-al-repositorio>\equipo-agentes
 claude plugin install equipo@equipo-agentes
 ```
 
-Reinicia Claude Code. ✅ **Listo cuando** `/agents` muestra `escritor-tests` y `documentador`.
+Reinicia Claude Code y comprueba que la interfaz muestre los agentes del plugin.
 
-> 💡 **Tip:** el plugin se lee directo de esta carpeta: lo que edites aplica en la siguiente sesión (o con `/reload-plugins`), sin reinstalar.
+Los hooks vienen desactivados en `plugins/equipo/hooks/hooks.pendiente.json`.
+Antes de activarlos, revisa qué ejecutan, confirma que están permitidos en el
+entorno y sigue las instrucciones de esa configuración.
 
-### Activar los hooks (cuando estén autorizados)
+## Perfiles disponibles
 
-Los hooks son scripts `.ps1` y el antivirus corporativo bloquea los `.ps1` nuevos (ni siquiera deja leerlos). Por eso vienen **desactivados**: `plugins/equipo/hooks/hooks.pendiente.json`.
+| Perfil | Función procedimental |
+|---|---|
+| `escritor-tests` | Convierte criterios de aceptación en pruebas. |
+| `documentador` | Documenta el comportamiento verificado del proyecto seleccionado. |
+| `rigor-numerico-scout` | Audita modelos y optimizadores según evidencia del proyecto. |
+| `project-scout` | Documenta una carpeta seleccionada sin importar datos externos. |
+| `backend-fastapi`, `frontend-angular` | Implementan componentes según contratos y convenciones locales. |
+| `auditor-seguridad` | Revisa riesgos de seguridad con evidencia. |
 
-1. Pide autorización para `plugins/equipo/hooks/verificar-tests.ps1` y `plugins/equipo/hooks/formatear.ps1`.
-2. Renombra `hooks.pendiente.json` → `hooks.json`.
-3. Abre una sesión nueva (o `/reload-plugins`).
-
-✅ **Listo cuando** un turno con un test roto no puede terminar y Claude dice *"Los tests fallan (pytest exit 1)…"*.
-
-> ⚠️ **Cuidado:** si activas los hooks sin autorización, verás un error de hook en cada turno.
-
-### Trabajar en un proyecto
-
-1. Abre la sesión **con la carpeta del proyecto** como directorio de trabajo (no `C:\Source`).
-2. Si el proyecto no tiene git ni `AGENTS.md`: `/preparar-proyecto`.
-3. Cada tarea: `/desarrollar <qué quieres>`.
-4. Manuales: `/documentar <proyecto> usuario`.
-
-## 2. Compartir con otra persona
-
-Comparte esta carpeta (o súbela a un repositorio Git). El método portable no
-depende de `C:\Source`; las skills de grafo y otras instrucciones de la
-integración Claude Code pueden conservar rutas o supuestos específicos y deben
-adaptarse al proyecto antes de usarse.
+Los nombres son identificadores de la integración; cuando una plataforma no
+permita registrar esos perfiles, el agente puede leer el archivo Markdown
+correspondiente y seguirlo como una instrucción de rol.

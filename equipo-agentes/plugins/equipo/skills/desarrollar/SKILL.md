@@ -1,6 +1,6 @@
 ---
 name: desarrollar
-description: Lleva una tarea de desarrollo (feature, fix, refactor, mejora de un modelo) de punta a punta con el equipo de agentes - explorar, plan con criterios de aceptación, tests primero, implementar, revisión en paralelo, documentación y commit. Úsalo cuando el usuario pida construir, corregir o mejorar algo en un proyecto de C:\Source, o escriba /desarrollar.
+description: Lleva una tarea de desarrollo de punta a punta: explorar, planificar, probar, implementar, revisar, documentar y versionar. Úsalo cuando la persona usuaria pida construir, corregir o mejorar un proyecto.
 argument-hint: <tarea a desarrollar>
 ---
 
@@ -30,9 +30,10 @@ Reglas:
 
 Tarea: `$ARGUMENTS`
 
-0. **Contexto.** Lee el `AGENTS.md` del proyecto y su nodo en
-   `C:\Source\.knowledge-graph\projects\`. Si el proyecto no tiene git o
-   `AGENTS.md`, para y propone `preparar-proyecto` primero. Comprueba
+0. **Contexto.** Lee las instrucciones y documentación que existan dentro del
+   proyecto seleccionado. No consultes nodos ni inventarios de otras carpetas.
+   Si el proyecto no tiene git o instrucciones locales, propone
+   `preparar-proyecto` primero. Comprueba
    `git status`: si hay cambios ajenos sin commitear, pregunta antes de
    seguir. Crea la rama de la tarea.
 1. **Explorar** (solo si el área no es conocida): subagente `Explore`
