@@ -286,10 +286,10 @@ body{margin:0;background:var(--bg);color:var(--fg);font:14px/1.45 system-ui,sans
 header{padding:12px 16px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
 h1{font-size:18px;margin:0 8px 0 0}
 button{font:inherit;padding:4px 10px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:6px;cursor:pointer}
-main{display:flex;gap:16px;padding:0 16px 16px;flex-wrap:wrap}
-#mapa{flex:1 1 560px;min-width:0;background:var(--panel);border-radius:8px;border:1px solid var(--line)}
-svg{width:100%;height:auto;display:block}
-#panel{flex:0 1 340px;background:var(--panel);border-radius:8px;border:1px solid var(--line);padding:12px 14px;min-height:200px}
+main{display:flex;gap:16px;padding:0 16px 16px;align-items:flex-start}
+#mapa{flex:1 1 0;min-width:0;background:var(--panel);border-radius:8px;border:1px solid var(--line);overflow:hidden}
+svg{width:100%;height:min(76vh,900px);min-height:460px;display:block;touch-action:none}
+#panel{flex:0 0 330px;box-sizing:border-box;background:var(--panel);border-radius:8px;border:1px solid var(--line);padding:14px 16px;min-height:200px;max-height:calc(100vh - 80px);overflow:auto}
 #panel h2{font-size:16px;margin:0 0 6px}
 #panel pre{white-space:pre-wrap;font:inherit;margin:4px 0 10px}
 .tag{display:inline-block;font-size:12px;padding:1px 7px;border-radius:10px;border:1px solid var(--line);margin:2px 2px 0 0}
@@ -299,6 +299,16 @@ svg{width:100%;height:auto;display:block}
 .etq{font-size:10px;fill:var(--muted)}
 .arista{stroke:var(--line);stroke-width:1.4;fill:none}
 .arista.fuerte{stroke:var(--accent);stroke-width:2}
+.arista-interna{stroke:var(--line);stroke-width:1.25;fill:none;marker-end:url(#flecha-interna);transition:opacity .15s,stroke .15s}
+.arista-interna.activa{stroke:var(--accent);stroke-width:2}
+.nodo-interno{transition:opacity .15s}
+.nodo-interno.seleccionado circle{stroke:var(--accent);stroke-width:3}
+.module-label{font-size:10px;fill:var(--fg);pointer-events:none}
+.nodo-interno.atenuado,.arista-interna.atenuada{opacity:.12}
+.controles{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.buscador{display:block;width:100%;box-sizing:border-box;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--fg);font:inherit;margin:8px 0}
+.ayuda{font-size:12px;color:var(--muted)}
+@media(max-width:900px){main{flex-direction:column}#mapa,#panel{width:100%;flex:auto}#panel{max-height:none}svg{height:65vh;min-height:360px}}
 </style>
 </head>
 <body>
@@ -333,9 +343,9 @@ function txt(tag, texto, parent, cls){
   if (parent) parent.appendChild(e);
   return e;
 }
-function svgRoot(){
+function svgRoot(viewBox="0 0 800 600"){
   mapa.textContent = "";
-  return el("svg", {viewBox: "0 0 800 600"}, mapa);
+  return el("svg", {viewBox, "aria-label":"Grafo interactivo"}, mapa);
 }
 function marcador(svg){
   const defs = el("defs", {}, svg);
@@ -396,36 +406,137 @@ function mostrarInterno(pid){
   const d = DATA.internos[pid];
   const nodo = DATA.nodos.find(n => n.id === pid);
   titulo.textContent = "Dependencias internas: " + (nodo ? nodo.name : pid);
-  const svg = svgRoot();
+  const svg = svgRoot("0 0 1000 700");
+  const defs = el("defs", {}, svg);
+  const marker = el("marker", {id:"flecha-interna", viewBox:"0 0 10 10", refX:"8", refY:"5", markerWidth:"5", markerHeight:"5", orient:"auto"}, defs);
+  el("path", {d:"M0,0 L10,5 L0,10 z", fill:"var(--muted)"}, marker);
   const subs = [...new Set(d.modules.map(m => m.subpaquete))];
   const color = s => PALETA[subs.indexOf(s) % PALETA.length];
   const pos = {};
   d.modules.forEach(m => pos[m.id] = m);
   d.edges.forEach(e => {
     const f = pos[e.from], t = pos[e.to];
-    el("line", {x1:f.x*0.8+80, y1:f.y*0.8+60, x2:t.x*0.8+80, y2:t.y*0.8+60, class:"arista"}, svg);
+    const line = el("line", {x1:f.x, y1:f.y, x2:t.x, y2:t.y, class:"arista-interna", "data-from":e.from, "data-to":e.to}, svg);
+    el("title", {}, line).textContent = `${e.from} importa ${e.to}`;
   });
   d.modules.forEach(m => {
-    const r = 4 + 2 * Math.sqrt(m.grado);
-    const c = el("circle", {cx:m.x*0.8+80, cy:m.y*0.8+60, r:r, fill: color(m.subpaquete), "fill-opacity":"0.8", class:"nodo",
-      stroke: m.shim ? "var(--fg)" : "none", "stroke-dasharray": m.shim ? "3 2" : "none"}, svg);
-    txt("title", `${m.id} (${m.path})`, c);
-    c.addEventListener("click", () => mostrarModulo(pid, m));
+    const r = Math.min(16, 5 + 1.6 * Math.sqrt(m.grado));
+    const g = el("g", {class:"nodo nodo-interno", "data-module":m.id, tabindex:"0", role:"button", "aria-label":`Módulo ${m.id}`}, svg);
+    el("circle", {cx:m.x, cy:m.y, r, fill:color(m.subpaquete), "fill-opacity":"0.85",
+      stroke:m.shim ? "var(--fg)" : "var(--panel)", "stroke-width":m.shim ? "2" : "1" , "stroke-dasharray":m.shim ? "4 3" : "none"}, g);
+    if (m.grado >= 5 || m.shim) {
+      el("text", {x:m.x + r + 3, y:m.y + 4, class:"module-label"}, g).textContent = m.id;
+    }
+    el("title", {}, g).textContent = `${m.id} · ${m.path} · ${m.grado} conexiones`;
+    g.addEventListener("click", () => seleccionarModulo(pid, m));
+    g.addEventListener("keydown", ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); seleccionarModulo(pid, m); } });
   });
   panel.textContent = "";
   const b = txt("button", "← volver al overview", panel);
   b.addEventListener("click", mostrarOverview);
-  b.style.marginBottom = "10px";
+  const controles = txt("div", "", panel, "controles");
+  const ajustar = txt("button", "Ajustar vista", controles);
+  ajustar.addEventListener("click", () => ajustarVista(svg, [0, 0, 1000, 700]));
+  const quitarFoco = txt("button", "Quitar foco", controles);
+  quitarFoco.addEventListener("click", () => enfocarModulo(svg, null));
+  const busqueda = txt("input", "", panel, "buscador");
+  busqueda.type = "search";
+  busqueda.placeholder = "Buscar módulo…";
+  busqueda.setAttribute("aria-label", "Buscar módulo");
+  const lista = txt("datalist", "", panel);
+  lista.id = "modulos-disponibles";
+  busqueda.setAttribute("list", lista.id);
+  d.modules.forEach(m => { const option = txt("option", "", lista); option.value = m.id; });
+  busqueda.addEventListener("change", () => {
+    const m = d.modules.find(item => item.id === busqueda.value);
+    if (m) seleccionarModulo(pid, m);
+  });
+  busqueda.addEventListener("input", () => {
+    const q = busqueda.value.trim().toLowerCase();
+    if (!q) { enfocarModulo(svg, null); return; }
+    d.modules.forEach(m => {
+      const g = [...svg.querySelectorAll("[data-module]")].find(node => node.dataset.module === m.id);
+      if (g) g.classList.toggle("atenuado", !m.id.toLowerCase().includes(q));
+    });
+  });
   if (d.compartido_con.length) {
     const nombres = d.compartido_con.map(id => (DATA.nodos.find(n => n.id === id) || {name:id}).name);
     txt("p", "Nota: este proyecto tiene el mismo código de dependencias que " + nombres.join(", ") + ". Es una copia, no un proyecto independiente.", panel, "nota");
   }
-  txt("p", `${d.modules.length} módulos, ${d.edges.length} imports. Tamaño = conexiones; color = subpaquete. Haz clic en un módulo.`, panel, "nota");
+  txt("p", `${d.modules.length} módulos · ${d.edges.length} imports internos. El tamaño indica conexiones; el color, subpaquete.`, panel, "nota");
+  txt("p", "Selecciona un módulo para resaltar sus imports directos. Usa la rueda para acercar/alejar y arrastra el fondo para desplazarte.", panel, "ayuda");
+  const leyenda = txt("div", "", panel, "leyenda");
+  subs.forEach((sub, i) => {
+    const item = txt("span", "", leyenda, "tag");
+    const punto = txt("span", "●", item);
+    punto.style.color = color(sub);
+    punto.setAttribute("aria-hidden", "true");
+    item.appendChild(document.createTextNode(" " + (sub || "raíz")));
+  });
+  attachPanZoom(svg, [0, 0, 1000, 700]);
+  window.grafoInterno = {svg, bounds:[0, 0, 1000, 700]};
+}
+
+function enfocarModulo(svg, id){
+  const relacionados = new Set(id ? [id] : []);
+  const edges = [...svg.querySelectorAll(".arista-interna")];
+  if (id) edges.forEach(e => {
+    if (e.dataset.from === id || e.dataset.to === id) {
+      relacionados.add(e.dataset.from); relacionados.add(e.dataset.to);
+      e.classList.add("activa");
+    } else e.classList.remove("activa");
+  });
+  else edges.forEach(e => e.classList.remove("activa"));
+  edges.forEach(e => e.classList.toggle("atenuada", !!id && !e.classList.contains("activa")));
+  svg.querySelectorAll("[data-module]").forEach(g => {
+    g.classList.toggle("atenuado", !!id && !relacionados.has(g.dataset.module));
+    g.classList.toggle("seleccionado", g.dataset.module === id);
+  });
+}
+
+function seleccionarModulo(pid, m){
+  const svg = mapa.querySelector("svg");
+  enfocarModulo(svg, m.id);
+  mostrarModulo(pid, m);
+}
+
+function ajustarVista(svg, bounds){ svg.setAttribute("viewBox", bounds.join(" ")); }
+
+function attachPanZoom(svg, bounds){
+  let box = [...bounds], drag = null;
+  const minW = bounds[2] * 0.12, maxW = bounds[2] * 2.5;
+  svg.addEventListener("wheel", ev => {
+    ev.preventDefault();
+    const rect = svg.getBoundingClientRect();
+    const px = (ev.clientX - rect.left) / rect.width;
+    const py = (ev.clientY - rect.top) / rect.height;
+    const factor = ev.deltaY < 0 ? 0.85 : 1.18;
+    const w = Math.max(minW, Math.min(maxW, box[2] * factor));
+    const h = w * bounds[3] / bounds[2];
+    box = [box[0] + box[2] * px - w * px, box[1] + box[3] * py - h * py, w, h];
+    svg.setAttribute("viewBox", box.join(" "));
+  }, {passive:false});
+  svg.addEventListener("pointerdown", ev => {
+    if (ev.target.closest("[data-module]")) return;
+    drag = {x:ev.clientX, y:ev.clientY, box:[...box]};
+    svg.setPointerCapture(ev.pointerId);
+  });
+  svg.addEventListener("pointermove", ev => {
+    if (!drag) return;
+    const rect = svg.getBoundingClientRect();
+    box[0] = drag.box[0] - (ev.clientX - drag.x) * drag.box[2] / rect.width;
+    box[1] = drag.box[1] - (ev.clientY - drag.y) * drag.box[3] / rect.height;
+    svg.setAttribute("viewBox", box.join(" "));
+  });
+  svg.addEventListener("pointerup", () => { drag = null; });
+  svg.addEventListener("pointercancel", () => { drag = null; });
 }
 
 function mostrarModulo(pid, m){
   const d = DATA.internos[pid];
   panel.textContent = "";
+  const volver = txt("button", "← volver al grafo", panel);
+  volver.addEventListener("click", () => mostrarInterno(pid));
   txt("h2", m.id, panel);
   txt("div", "Ruta: " + m.path, panel, "nota");
   txt("div", "Líneas: " + m.loc + " · subpaquete: " + m.subpaquete, panel, "nota");

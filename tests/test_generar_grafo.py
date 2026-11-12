@@ -4,10 +4,17 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from tools.generar_grafo import cargar_internos, cargar_proyectos
+from tools.generar_grafo import PLANTILLA, cargar_internos, cargar_proyectos
 
 
 class CargarProyectosTests(unittest.TestCase):
+    def test_vista_interna_escalable_y_con_controles_interactivos(self):
+        self.assertIn('svgRoot("0 0 1000 700")', PLANTILLA)
+        self.assertIn("attachPanZoom(svg, [0, 0, 1000, 700])", PLANTILLA)
+        self.assertIn('placeholder = "Buscar módulo…"', PLANTILLA)
+        self.assertIn('marker-end:url(#flecha-interna)', PLANTILLA)
+        self.assertIn('function enfocarModulo(svg, id)', PLANTILLA)
+
     def test_cli_predeterminado_genera_solo_desde_la_carpeta_base(self):
         with tempfile.TemporaryDirectory() as temporal:
             base = Path(temporal)

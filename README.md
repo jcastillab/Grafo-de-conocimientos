@@ -40,6 +40,11 @@ Cuando se solicitan fichas, se asocian por nombre normalizado (ignora
 mayúsculas, espacios, guiones y acentos). Si varias carpetas coinciden, se
 conservan como nodos separados y se distinguen por su nombre original.
 
+Las vistas de dependencias internas permiten buscar módulos, resaltar sus
+imports directos, acercar/alejar con la rueda y desplazarse arrastrando el
+fondo. Las flechas indican la dirección del import; el tamaño del nodo refleja
+sus conexiones y el color identifica el subpaquete.
+
 El escaneo es superficial intencionadamente: cada subcarpeta directa es un
 nodo, no se deducen relaciones automáticamente ni se recorren subcarpetas
 recursivamente.
