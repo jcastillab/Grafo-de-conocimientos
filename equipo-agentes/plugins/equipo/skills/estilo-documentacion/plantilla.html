@@ -1,0 +1,450 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>{{Proyecto}} · Manual de {{rol}}</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+[hidden]{display:none!important}img{max-width:100%}
+/* Layout: sidebar índice fijo + columna de lectura; en móvil, barra superior con índice plegable.
+   Color: marca Sunshine Bouquet — turquesa #00AFAA y fucsia #E04B9B (rellenos); variantes oscuras para texto legible. */
+:root{
+  --brand:#00afaa; --brand-pink:#e04b9b;
+  --bg:#f5f9f9; --surface:#ffffff; --sunk:#e6f2f1; --line:#cfe1e0;
+  --fg:#16302f; --muted:#52706e;
+  --leaf:#00807c; --leaf-soft:#d6f1ef;
+  --rose:#b9307a; --rose-soft:#fbe5f1;
+  --warn:#8a5a00; --warn-soft:#fbf0d9;
+  --ok:#00807c; --ok-soft:#e0f4f2;
+  --code-bg:#12302f; --code-fg:#e3f3f2;
+  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-mono:"JetBrains Mono", Consolas, "Cascadia Mono", monospace;
+  --radius:10px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --brand:#2cc6c0; --brand-pink:#ec6cb0; --bg:#0e1a1a; --surface:#142424; --sunk:#1a2e2e; --line:#294443;
+    --fg:#e1f0ef; --muted:#93b4b2;
+    --leaf:#45d3cd; --leaf-soft:#123b39;
+    --rose:#f287c0; --rose-soft:#3a1a2d;
+    --warn:#e8b65a; --warn-soft:#352a14;
+    --ok:#45d3cd; --ok-soft:#133230;
+    --code-bg:#081414; --code-fg:#d9eeed;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --brand:#2cc6c0; --brand-pink:#ec6cb0; --bg:#0e1a1a; --surface:#142424; --sunk:#1a2e2e; --line:#294443;
+  --fg:#e1f0ef; --muted:#93b4b2;
+  --leaf:#45d3cd; --leaf-soft:#123b39;
+  --rose:#f287c0; --rose-soft:#3a1a2d;
+  --warn:#e8b65a; --warn-soft:#352a14;
+  --ok:#45d3cd; --ok-soft:#133230;
+  --code-bg:#081414; --code-fg:#d9eeed;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important}}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:17px;line-height:1.6;margin:0}
+a{color:var(--leaf)}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px;border-radius:4px}
+
+.shell{display:grid;grid-template-columns:270px minmax(0,1fr);max-width:1240px;margin:0 auto;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));gap:48px}
+
+/* Índice */
+.toc{position:sticky;top:env(safe-area-inset-top, 0px);align-self:start;max-height:100vh;overflow-y:auto;padding-block:28px}
+.brand{font-family:var(--f-display);font-weight:800;font-size:1.25rem;line-height:1.15;margin:0 0 4px}
+.brand small{display:block;font-family:var(--f-body);font-weight:400;font-size:.85rem;color:var(--muted);margin-top:4px}
+.toc ol{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:2px}
+.toc a{display:flex;gap:10px;padding:6px 10px;border-radius:8px;color:var(--muted);text-decoration:none;font-size:.95rem;line-height:1.35}
+.toc a::before{content:attr(data-n);font-family:var(--f-mono);font-size:.78rem;min-width:1.6em;padding-top:2px;color:var(--muted)}
+.ver{display:inline-block;font-family:var(--f-mono);font-size:.7rem;letter-spacing:.04em;padding:1px 6px;border-radius:5px;background:var(--warn-soft);color:var(--warn);vertical-align:2px;white-space:nowrap}
+.cmd pre .v{color:#f3b8c8;font-weight:600}
+.toc a:hover{background:var(--sunk);color:var(--fg)}
+.toc a.active{background:var(--leaf-soft);color:var(--fg);font-weight:600}
+.toc a.active::before{color:var(--leaf)}
+.mobilebar{display:none}
+.logo{display:block;aspect-ratio:720/207;background:url(img/logo_sunshine_bouquet.png) no-repeat center/contain}
+.brand .logo{width:200px;max-width:100%;margin-bottom:18px}
+.lockup{display:flex;align-items:center;gap:10px;min-width:0}
+.mobilebar .logo{width:118px;flex:none}
+
+main{padding-block:28px 80px;min-width:0}
+section{padding-top:24px;scroll-margin-top:16px}
+section + section{border-top:1px solid var(--line);margin-top:40px}
+.eyebrow{font-family:var(--f-mono);font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--rose);margin:0}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;line-height:1.15}
+h1{font-size:clamp(2rem,4.5vw,3rem);font-weight:800;margin:6px 0 12px;letter-spacing:-.01em}
+h2{font-size:1.75rem;font-weight:800;margin:4px 0 14px}
+h3{font-size:1.2rem;font-weight:600;margin:28px 0 8px}
+p,li{max-width:68ch}
+.lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
+code{font-family:var(--f-mono);font-size:.86em;background:var(--sunk);padding:1px 5px;border-radius:5px}
+kbd{font-family:var(--f-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:2px;border-radius:5px;padding:0 5px;background:var(--surface)}
+
+/* Recorrido */
+.flow{list-style:none;padding:0;margin:24px 0 8px;display:flex;flex-wrap:wrap;gap:8px 4px;align-items:center}
+.flow li{display:flex;align-items:center;gap:4px;max-width:none}
+.flow li:not(:last-child)::after{content:"→";color:var(--muted);padding:0 2px}
+.flow a{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;border:1.5px solid var(--line);background:var(--surface);color:var(--fg);text-decoration:none;font-weight:600;font-size:.95rem;transition:border-color .15s,background .15s}
+.flow a:hover{border-color:var(--leaf);background:var(--leaf-soft)}
+.flow a span{font-family:var(--f-mono);font-size:.75rem;color:var(--rose)}
+.flow .once a{border-style:dashed}
+.legend{font-size:.85rem;color:var(--muted)}
+
+/* Tablas */
+.tbl{overflow-x:auto;margin:14px 0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-weight:700;background:var(--sunk);font-size:.85rem;letter-spacing:.02em}
+tr:last-child td{border-bottom:0}
+td:first-child{font-weight:600}
+.num{font-variant-numeric:tabular-nums}
+
+/* Avisos */
+.note{display:grid;grid-template-columns:auto minmax(0,1fr);gap:10px;padding:12px 14px;border-radius:var(--radius);margin:16px 0;max-width:72ch;border:1px solid transparent}
+.note b.tag{font-family:var(--f-mono);font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;padding:2px 7px;border-radius:5px;height:fit-content;margin-top:3px}
+.note p{margin:0}
+.tip{background:var(--leaf-soft)} .tip b.tag{background:var(--leaf);color:var(--surface)}
+.warn{background:var(--warn-soft)} .warn b.tag{background:var(--warn);color:var(--surface)}
+.done{background:var(--surface);border-color:var(--line)} .done b.tag{background:var(--ok-soft);color:var(--ok)}
+.danger{background:var(--rose-soft)} .danger b.tag{background:var(--rose);color:var(--surface)}
+
+/* Código */
+.cmd{position:relative;margin:14px 0;max-width:100%}
+.cmd pre{margin:0;background:var(--code-bg);color:var(--code-fg);padding:14px 16px;padding-right:96px;border-radius:var(--radius);overflow-x:auto;font-family:var(--f-mono);font-size:.86rem;line-height:1.55}
+.copy{position:absolute;top:8px;right:8px;font:600 .8rem var(--f-body);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer}
+.copy:hover{border-color:var(--leaf)}
+
+/* Checklists */
+.checklist{list-style:none;padding:0;margin:14px 0;display:grid;gap:6px;max-width:72ch}
+.checklist label{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;padding:10px 12px;border-radius:8px;background:var(--surface);border:1px solid var(--line);cursor:pointer;align-items:start}
+.checklist input{width:18px;height:18px;margin:3px 0 0;accent-color:var(--leaf)}
+.checklist label:has(input:checked){background:var(--ok-soft);border-color:transparent}
+.checklist label:has(input:checked) .t{text-decoration:line-through;color:var(--muted)}
+.progress{display:flex;align-items:center;gap:12px;font-size:.9rem;color:var(--muted);margin-top:8px}
+.bar{flex:0 1 220px;height:8px;background:var(--sunk);border-radius:99px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--brand);transition:width .25s}
+.reset{font:inherit;font-size:.85rem;background:none;border:0;color:var(--muted);text-decoration:underline;cursor:pointer;padding:0}
+
+/* Pasos de configuración */
+.steps{list-style:none;padding:0;margin:18px 0;display:grid;gap:12px;counter-reset:s}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px 14px 60px;position:relative;counter-increment:s;max-width:none}
+.step::before{content:counter(s);position:absolute;left:14px;top:14px;font-family:var(--f-mono);font-weight:600;font-size:.85rem;color:var(--rose)}
+.steps-plain .step::before{content:counter(s)}
+.step h3{margin:0 0 6px;font-size:1.1rem}
+.step p{margin:6px 0}
+.path{font-family:var(--f-mono);font-size:.84rem;background:var(--sunk);padding:2px 7px;border-radius:5px;display:inline;line-height:1.9}
+.step .mark{display:flex;gap:8px;align-items:center;font-size:.9rem;color:var(--muted);margin-top:10px;cursor:pointer;width:fit-content}
+.step .mark input{accent-color:var(--leaf);width:17px;height:17px}
+.step:has(.mark input:checked){border-color:var(--leaf);background:var(--ok-soft)}
+
+/* Herramientas */
+.tool{background:var(--surface);border:1.5px solid var(--brand);border-radius:var(--radius);padding:18px;margin:18px 0;max-width:72ch}
+.tool h3{margin-top:0}
+.row{display:flex;flex-wrap:wrap;gap:12px 20px;align-items:end}
+.field{display:grid;gap:4px;font-size:.9rem;font-weight:600}
+.field input,.field select{font:inherit;font-weight:400;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--fg);width:160px;max-width:100%}
+.result{display:flex;flex-wrap:wrap;gap:12px;margin-top:14px}
+.result div{background:var(--sunk);border-radius:8px;padding:10px 14px;min-width:150px}
+.result b{display:block;font-family:var(--f-display);font-size:1.6rem;font-variant-numeric:tabular-nums}
+.result span{font-size:.82rem;color:var(--muted)}
+.fine{font-size:.85rem;color:var(--muted);margin:10px 0 0}
+
+/* Buscador de errores */
+.search{width:100%;font:inherit;padding:12px 14px;border:1.5px solid var(--line);border-radius:var(--radius);background:var(--surface);color:var(--fg)}
+.search:focus{border-color:var(--leaf);outline:none}
+.hits{font-size:.88rem;color:var(--muted);margin:8px 0 0}
+.errors{display:grid;gap:8px;margin-top:14px}
+.err{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--brand-pink);border-radius:8px;padding:10px 14px;display:grid;gap:4px}
+.err q{font-family:var(--f-mono);font-size:.84rem;quotes:none;font-weight:600}
+.err .why{color:var(--muted);font-size:.92rem}
+.err .fix{font-size:.95rem}
+.err .fix b{color:var(--leaf)}
+.err .area{font-family:var(--f-mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.empty{padding:14px;border:1px dashed var(--line);border-radius:8px;color:var(--muted)}
+
+details.annex{border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);margin:12px 0}
+details.annex summary{cursor:pointer;padding:12px 16px;font-weight:700}
+details.annex > div{padding:0 16px 12px}
+
+.traps{counter-reset:tr;list-style:none;padding:0;display:grid;gap:10px}
+.traps li{counter-increment:tr;display:grid;grid-template-columns:34px minmax(0,1fr);gap:8px;max-width:72ch}
+.traps li::before{content:counter(tr);font-family:var(--f-display);font-weight:800;font-size:1.3rem;color:var(--rose);line-height:1.2}
+
+footer{margin-top:60px;font-size:.85rem;color:var(--muted)}
+/* Capturas de pantalla: marcas numeradas en rosa; clic para ampliar */
+.shot{margin:16px 0;max-width:100%}
+.shot .zoom{display:block;width:100%;padding:0;border:1px solid var(--line);border-radius:var(--radius);background:var(--surface);cursor:zoom-in;overflow:hidden}
+.shot .zoom:hover{border-color:var(--leaf)}
+.shot img{display:block;width:100%;height:auto}
+.shot figcaption{font-size:.88rem;color:var(--muted);margin-top:6px;max-width:72ch}
+.shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 16px;align-items:start;margin:16px 0}
+.shots .shot{margin:0}
+.n{display:inline-grid;place-items:center;min-width:1.4em;height:1.4em;padding:0 .3em;border-radius:99px;background:#d23b8c;color:#fff;font:700 .74rem/1 var(--f-body);vertical-align:.12em}
+dialog.lb{padding:0;border:0;background:transparent;max-width:96vw;max-height:94vh}
+dialog.lb::backdrop{background:rgba(0,0,0,.78)}
+dialog.lb img{display:block;max-width:96vw;max-height:88vh;width:auto;height:auto;border-radius:8px;background:#fff}
+dialog.lb p{margin:8px 0 0;color:#fff;font-size:.9rem;text-align:center}
+dialog.lb button{position:fixed;top:12px;right:12px;font:600 .9rem var(--f-body);background:#fff;color:#16302f;border:0;border-radius:8px;padding:6px 12px;cursor:pointer}
+
+@media (max-width: 900px){
+  .shell{grid-template-columns:minmax(0,1fr);gap:0}
+  .toc{display:none}
+  .toc.open{display:block;position:fixed;inset:0;z-index:20;background:var(--bg);max-height:none;
+    padding:calc(64px + env(safe-area-inset-top, 0px)) max(16px, env(safe-area-inset-right, 0px)) 24px max(16px, env(safe-area-inset-left, 0px))}
+  .mobilebar{display:flex;position:sticky;top:env(safe-area-inset-top, 0px);z-index:30;justify-content:space-between;align-items:center;
+    background:var(--bg);border-bottom:1px solid var(--line);padding-block:10px;margin-inline:calc(-1 * max(16px, env(safe-area-inset-left, 0px)));
+    padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px))}
+  .mobilebar b{font-family:var(--f-display);font-weight:800}
+  .mobilebar button{font:600 .9rem var(--f-body);background:var(--surface);color:var(--fg);border:1px solid var(--line);border-radius:8px;padding:6px 12px}
+  body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top, 0px);z-index:40;background:var(--bg)}
+  .step{padding-left:16px;padding-top:40px}
+}
+</style>
+</head>
+<body>
+
+<div class="shell" data-ns="{{ns}}">
+  <nav class="toc" id="toc" aria-label="Índice">
+    <p class="brand"><span class="logo" role="img" aria-label="Sunshine Bouquet"></span>{{Proyecto}}<small>Manual de {{rol}}</small></p>
+    <ol>
+      <li><a data-n="0" href="#que-es">¿Qué es esto?</a></li>
+      <li><a data-n="1" href="#antes">Antes de empezar</a></li>
+      <li><a data-n="2" href="#tarea">{{Primera tarea}}</a></li>
+      <li><a data-n="3" href="#problemas">Problemas comunes</a></li>
+      <li><a data-n="4" href="#ayuda">Cuándo pedir ayuda</a></li>
+    </ol>
+  </nav>
+
+  <main>
+    <div class="mobilebar"><span class="lockup"><span class="logo" role="img" aria-label="Sunshine Bouquet"></span><b>{{Proyecto}}</b></span><button type="button" id="tocBtn" aria-expanded="false" aria-controls="toc">Índice</button></div>
+
+    <section id="que-es">
+      <p class="eyebrow">Manual de {{rol}}</p>
+      <h1>{{Verbo + objeto, paso a paso}}</h1>
+      <p class="lead">{{Qué hace el programa en lenguaje de la operación, 2-3 frases. Dónde funciona y qué entrega.}}</p>
+      <div class="note tip"><b class="tag">Ojo</b><p>Este manual es para quien <b>{{tareas del rol}}</b>. {{Lo que NO cubre}} tiene su propio manual.</p></div>
+
+      <ol class="flow" aria-label="Tu trabajo">
+        <li><a href="#antes"><span>1</span>{{Paso}}</a></li>
+        <li><a href="#tarea"><span>2</span>{{Paso}}</a></li>
+      </ol>
+      <p class="legend">Pulsa una etapa para ir a ella.</p>
+
+      <h3>Palabras que vas a ver</h3>
+      <div class="tbl"><table>
+        <thead><tr><th>Palabra</th><th>Qué significa</th></tr></thead>
+        <tbody>
+          <tr><td>{{Término}}</td><td>{{Explicación cotidiana, con ejemplo.}}</td></tr>
+        </tbody>
+      </table></div>
+    </section>
+
+    <section id="antes">
+      <p class="eyebrow">Sección 1</p>
+      <h2>Antes de empezar</h2>
+      <p>Marca cada punto. La página recuerda lo que marcas en este navegador.</p>
+      <ul class="checklist" data-list="antes">
+        <li><label><input type="checkbox" id="antes-1"><span class="t">{{Requisito}}</span></label></li>
+      </ul>
+      <div class="progress" data-progress="antes"><div class="bar"><i></i></div><span>0 de 1</span><button class="reset" type="button" data-reset="antes">Desmarcar todo</button></div>
+    </section>
+
+    <section id="tarea">
+      <p class="eyebrow">Sección 2</p>
+      <h2>{{Primera tarea}}</h2>
+      <ol class="steps steps-plain" data-list="tarea">
+        <li class="step"><h3>{{Paso}}</h3>
+          <p>Ve a <span class="path">{{Menú → Opción}}</span> y pulsa <b>{{Botón}}</b>.</p>
+          <figure class="shot"><button class="zoom" type="button" aria-label="Ampliar: {{descripción}}"><img src="img/{{captura}}.webp" alt="{{descripción}}" loading="lazy" decoding="async"></button><figcaption><b class="n">1</b> <b>{{Botón}}</b> {{para qué}}.</figcaption></figure>
+          <label class="mark"><input type="checkbox" id="tarea-1">Hecho</label></li>
+      </ol>
+      <div class="progress" data-progress="tarea"><div class="bar"><i></i></div><span>0 de 1</span><button class="reset" type="button" data-reset="tarea">Empezar de nuevo</button></div>
+      <div class="note done"><b class="tag">Listo</b><p>Cuando ves <i>“{{mensaje literal de la app}}”</i>.</p></div>
+      <div class="cmd"><pre>{{comando o ruta}}</pre></div>
+      <div class="note warn"><b class="tag">Cuidado</b><p>{{Lo que puede salir mal y cómo evitarlo.}}</p></div>
+    </section>
+
+    <section id="problemas">
+      <p class="eyebrow">Sección 3</p>
+      <h2>Problemas comunes</h2>
+      <p>Escribe o pega el mensaje que ves, o una palabra clave.</p>
+      <label for="q" class="field">Buscar un error</label>
+      <input id="q" class="search" type="search" placeholder="Ej.: {{mensaje frecuente}}" autocomplete="off" data-empty="No encontré ese mensaje. Prueba con una o dos palabras clave. Si no aparece, copia el mensaje y pide ayuda.">
+      <p class="hits" id="hits" aria-live="polite"></p>
+      <div class="errors" id="errors"></div>
+    </section>
+
+    <section id="ayuda">
+      <p class="eyebrow">Sección 4</p>
+      <h2>Cuándo pedir ayuda</h2>
+      <ul>
+        <li>{{Situación concreta}}</li>
+      </ul>
+      <div class="note tip"><b class="tag">Tip</b><p>Cuando avises, copia el mensaje exacto o haz una captura con <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>.</p></div>
+    </section>
+
+    <footer>Sunshine Bouquet · {{Proyecto}} · manual de {{rol}} · revisión {{dd-mm-aaaa}}.</footer>
+  </main>
+</div>
+
+<script>
+// Errores conocidos: [área, mensaje literal (sacado del código), causa, qué hacer]
+window.ERR = [
+  ["{{Área}}","{{Mensaje exacto}}","{{Qué pasa}}","{{Qué hacer}}"]
+];
+(function(){
+  var shell = document.querySelector(".shell");
+  var NS = (shell && shell.dataset.ns) || "cr";
+  var store = {
+    get: function(k){ try { return JSON.parse(localStorage.getItem(NS + ":" + k)); } catch(e){ return null; } },
+    set: function(k, v){ try { localStorage.setItem(NS + ":" + k, JSON.stringify(v)); } catch(e){} }
+  };
+  var $ = function(id){ return document.getElementById(id); };
+
+  // Botones de copiar
+  document.querySelectorAll(".cmd").forEach(function(box){
+    var pre = box.querySelector("pre");
+    var b = document.createElement("button");
+    b.type = "button"; b.className = "copy"; b.textContent = "Copiar";
+    b.addEventListener("click", function(){
+      var text = pre.textContent;
+      var done = function(){ b.textContent = "Copiado"; setTimeout(function(){ b.textContent = "Copiar"; }, 1500); };
+      var fallback = function(){
+        var r = document.createRange(); r.selectNodeContents(pre);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        b.textContent = "Pulsa Ctrl+C";
+        setTimeout(function(){ b.textContent = "Copiar"; }, 2500);
+      };
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, fallback);
+        else fallback();
+      } catch(e){ fallback(); }
+    });
+    box.appendChild(b);
+  });
+
+  // Checklists con progreso. Las listas con data-por-finca se guardan por finca.
+  function fincaCode(){ var i = $("fFinca"); return (i && i.value.trim().toLowerCase().replace(/\s+/g, "")) || "general"; }
+  function listEl(name){ return document.querySelector('[data-list="' + name + '"]'); }
+  function key(name){ var l = listEl(name); return l && l.hasAttribute("data-por-finca") ? name + ":" + fincaCode() : name; }
+  function boxes(name){ return Array.from(document.querySelectorAll('[data-list="' + name + '"] input[type=checkbox]')); }
+  function paint(name){
+    var bs = boxes(name), n = bs.filter(function(b){ return b.checked; }).length;
+    var p = document.querySelector('[data-progress="' + name + '"]');
+    if (!p) return;
+    p.querySelector("i").style.width = (bs.length ? n / bs.length * 100 : 0) + "%";
+    p.querySelector("span").textContent = n + " de " + bs.length + (n === bs.length ? " · completo" : "");
+  }
+  function load(name){
+    var saved = store.get(key(name)) || {};
+    boxes(name).forEach(function(b){ b.checked = !!saved[b.id]; });
+    paint(name);
+  }
+  var names = Array.from(new Set(Array.from(document.querySelectorAll("[data-list]")).map(function(el){ return el.dataset.list; })));
+  names.forEach(function(name){
+    boxes(name).forEach(function(b){
+      b.addEventListener("change", function(){
+        var s = store.get(key(name)) || {}; s[b.id] = b.checked; store.set(key(name), s); paint(name);
+      });
+    });
+  });
+  document.querySelectorAll("[data-reset]").forEach(function(btn){
+    btn.addEventListener("click", function(){
+      var name = btn.dataset.reset;
+      boxes(name).forEach(function(b){ b.checked = false; });
+      store.set(key(name), {}); paint(name);
+    });
+  });
+
+  names.forEach(load);
+
+  // Buscador de errores (datos en window.ERR: [área, mensaje, causa, solución])
+  var q = $("q");
+  if (q && window.ERR){
+    var norm = function(s){ return s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9 ]+/g, " ").replace(/\s+/g, " ").trim(); };
+    var STOP = new Set("el la los las de del un una y o a en que se no es por con para al su lo x".split(" "));
+    var sig = function(s){ return s.split(" ").filter(function(w){ return w.length > 2 && !STOP.has(w); }); };
+    var rows = window.ERR.map(function(e){ return { e: e, hay: norm(e.join(" ")), msg: sig(norm(e[1])) }; });
+    var list = $("errors"), hits = $("hits");
+    var el = function(tag, cls, text){ var n = document.createElement(tag); if (cls) n.className = cls; if (text) n.textContent = text; return n; };
+    var render = function(){
+      var raw = norm(q.value), words = sig(raw);
+      var shown = rows.map(function(r){
+        if (!words.length) return { r: r, s: 1 };
+        var hit = words.filter(function(w){ return r.hay.indexOf(w) >= 0; }).length;
+        var inQ = r.msg.filter(function(w){ return raw.indexOf(w) >= 0; }).length;
+        return { r: r, s: Math.max(hit / words.length, r.msg.length ? inQ / r.msg.length : 0) };
+      }).filter(function(x){ return x.s >= (words.length ? 0.5 : 0); })
+        .sort(function(a, b){ return b.s - a.s; });
+      list.textContent = "";
+      shown.forEach(function(x){
+        var e = x.r.e, card = el("div", "err");
+        card.appendChild(el("span", "area", e[0]));
+        card.appendChild(el("q", null, e[1]));
+        card.appendChild(el("span", "why", e[2]));
+        var fix = el("span", "fix"); fix.appendChild(el("b", null, "Qué hacer: ")); fix.appendChild(document.createTextNode(e[3]));
+        card.appendChild(fix);
+        list.appendChild(card);
+      });
+      if (!shown.length) list.appendChild(el("div", "empty", q.dataset.empty || "No encontré ese mensaje. Prueba con una o dos palabras clave."));
+      hits.textContent = words.length ? shown.length + " resultado" + (shown.length === 1 ? "" : "s") : "Mostrando los " + rows.length + " problemas conocidos.";
+    };
+    q.addEventListener("input", render); render();
+  }
+
+  // Índice: sección activa y menú móvil
+  var links = Array.from(document.querySelectorAll(".toc a"));
+  var byId = {}; links.forEach(function(a){ byId[a.getAttribute("href").slice(1)] = a; });
+  if ("IntersectionObserver" in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if (en.isIntersecting && byId[en.target.id]){
+          links.forEach(function(a){ a.classList.remove("active"); });
+          byId[en.target.id].classList.add("active");
+        }
+      });
+    }, { rootMargin: "-20% 0px -70% 0px" });
+    document.querySelectorAll("main section[id]").forEach(function(s){ io.observe(s); });
+  }
+  var toc = $("toc"), btn = $("tocBtn");
+  var close = function(){ toc.classList.remove("open"); btn.setAttribute("aria-expanded", "false"); btn.textContent = "Índice"; };
+  btn.addEventListener("click", function(){
+    var open = toc.classList.toggle("open");
+    btn.setAttribute("aria-expanded", open); btn.textContent = open ? "Cerrar" : "Índice";
+  });
+  links.forEach(function(a){ a.addEventListener("click", function(){ if (toc.classList.contains("open")) close(); }); });
+})();
+
+
+</script>
+
+<script>
+// Capturas: clic para ver en grande; Esc o clic fuera para cerrar.
+(function(){
+  var dlg = document.createElement("dialog");
+  dlg.className = "lb";
+  dlg.setAttribute("aria-label", "Captura ampliada");
+  dlg.innerHTML = '<button type="button">Cerrar</button><img alt=""><p></p>';
+  document.body.appendChild(dlg);
+  var img = dlg.querySelector("img"), cap = dlg.querySelector("p");
+  document.addEventListener("click", function(e){
+    var b = e.target.closest && e.target.closest(".shot .zoom");
+    if (!b) return;
+    var src = b.querySelector("img");
+    img.src = src.src; img.alt = src.alt;
+    var fc = b.parentNode.querySelector("figcaption");
+    cap.textContent = fc ? fc.textContent : "";
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+  });
+  dlg.addEventListener("click", function(e){ if (e.target === dlg || e.target.tagName === "BUTTON" || e.target === img) dlg.close(); });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+{
+  "name": "equipo-agentes",
+  "owner": {
+    "name": "Juan Esteban Castilla"
+  },
+  "plugins": [
+    {
+      "name": "equipo",
+      "source": "./plugins/equipo",
+      "description": "Equipo de agentes para C:/Source: bucle de desarrollo verificable, documentación estilo manual Sunshine, rigor numérico y grafo de conocimiento.",
+      "version": "0.1.0"
+    }
+  ],
+  "metadata": {
+    "description": "Plugins de trabajo para los proyectos de C:/Source."
+  }
+}
