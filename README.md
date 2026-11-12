@@ -40,3 +40,9 @@ con `--projects-dir` y `--deps-dir`.
 El escaneo es superficial intencionadamente: cada subcarpeta directa es un
 nodo, no se deducen relaciones automáticamente ni se recorren subcarpetas
 recursivamente.
+
+## Desarrollo con agentes
+
+Las instrucciones del repositorio están en `AGENTS.md`. El flujo de trabajo
+portable para otros agentes está en
+[`equipo-agentes/FLUJO-PORTABLE.md`](equipo-agentes/FLUJO-PORTABLE.md).

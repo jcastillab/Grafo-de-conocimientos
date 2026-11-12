@@ -1,17 +1,32 @@
 <img src="plugins/equipo/skills/estilo-documentacion/img/logo_sunshine_bouquet.png" alt="Sunshine Bouquet" width="240">
 
-# Equipo de agentes — plugin `equipo`
+# Equipo de agentes — método portable e integración Claude Code
 
-> **Para quién es:** para quien desarrolla en los proyectos de `C:\Source` con Claude Code.
-> **Qué hace:** pone a trabajar un equipo de agentes con un mismo método en todos los proyectos: tests primero, revisión independiente, documentación al día y commit.
+> **Para quién es:** equipos que quieran aplicar el mismo flujo de desarrollo
+> desde distintos agentes de programación.
+> **Qué hace:** define un método portable y conserva, además, una integración
+> opcional para Claude Code.
 >
-> Última revisión: 2026-10-23.
+> Última revisión: 2026-11-12.
 
 ---
 
-## 0. ¿Qué es esto?
+## 0. Método portable (cualquier agente)
 
-Un plugin de Claude Code con tres cosas:
+Lee [`FLUJO-PORTABLE.md`](FLUJO-PORTABLE.md) para aplicar el ciclo de trabajo
+sin depender de comandos, hooks o capacidades particulares. En este repositorio,
+`../AGENTS.md` sirve como punto de entrada para herramientas que reconocen ese
+formato. En otra plataforma, indica al agente que lea ambos documentos usando la
+plantilla del flujo.
+
+El flujo contempla exploración, criterios de aceptación, pruebas, implementación
+acotada, revisión, documentación y commits pequeños. Delegar en los perfiles de
+`plugins/equipo/agents/` es opcional; sus documentos también pueden leerse como
+guías de rol por un agente que no admita subagentes.
+
+## 1. Integración opcional: Claude Code
+
+La carpeta `plugins/equipo/` mantiene la integración nativa para Claude Code:
 
 1. **Un método de trabajo** (`/desarrollar`): cada cambio pasa por plan → tests que fallan → implementación → revisión en paralelo → documentación → commit.
 2. **Un equipo** de agentes especializados que el método llama solos.
@@ -43,7 +58,7 @@ Además usa los integrados `Explore`, `Plan` y la skill `code-review`.
 
 ---
 
-## 1. Instalar (una vez por PC)
+### Instalar (una vez por PC)
 
 ```powershell
 claude plugin marketplace add C:\Source\equipo-agentes
@@ -54,7 +69,7 @@ Reinicia Claude Code. ✅ **Listo cuando** `/agents` muestra `escritor-tests` y 
 
 > 💡 **Tip:** el plugin se lee directo de esta carpeta: lo que edites aplica en la siguiente sesión (o con `/reload-plugins`), sin reinstalar.
 
-## 2. Activar los hooks (cuando estén autorizados)
+### Activar los hooks (cuando estén autorizados)
 
 Los hooks son scripts `.ps1` y el antivirus corporativo bloquea los `.ps1` nuevos (ni siquiera deja leerlos). Por eso vienen **desactivados**: `plugins/equipo/hooks/hooks.pendiente.json`.
 
@@ -66,13 +81,16 @@ Los hooks son scripts `.ps1` y el antivirus corporativo bloquea los `.ps1` nuevo
 
 > ⚠️ **Cuidado:** si activas los hooks sin autorización, verás un error de hook en cada turno.
 
-## 3. Trabajar en un proyecto
+### Trabajar en un proyecto
 
 1. Abre la sesión **con la carpeta del proyecto** como directorio de trabajo (no `C:\Source`).
 2. Si el proyecto no tiene git ni `AGENTS.md`: `/preparar-proyecto`.
 3. Cada tarea: `/desarrollar <qué quieres>`.
 4. Manuales: `/documentar <proyecto> usuario`.
 
-## 4. Compartir con otra persona
+## 2. Compartir con otra persona
 
-Pásale esta carpeta (o súbela a un repo git). Ella hace el paso 1 con su ruta. Las skills del grafo asumen `C:\Source`; el resto funciona en cualquier carpeta.
+Comparte esta carpeta (o súbela a un repositorio Git). El método portable no
+depende de `C:\Source`; las skills de grafo y otras instrucciones de la
+integración Claude Code pueden conservar rutas o supuestos específicos y deben
+adaptarse al proyecto antes de usarse.
