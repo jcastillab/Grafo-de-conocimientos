@@ -43,32 +43,24 @@ La etiqueta puede cambiar de palabra (`Ojo`, `Tiempo`) manteniendo la clase.
 
 ## Comandos con valores del usuario
 
-```html
-<div class="cmd"><pre data-tpl="pronostico.bat {semanas}"></pre></div>
-```
-`{finca}` y `{semanas}` se rellenan desde inputs `#fFinca` / `#fSemanas` si
-existen en la página (ficha). Sin ficha, usa `<pre>` normal. Todo `.cmd`
-tiene botón **Copiar** automático.
+Usa `data-tpl` solo con parámetros definidos por el proyecto actual; no copies
+nombres de comandos o campos de otro sistema. Sin parámetros dinámicos, usa
+`<pre>` normal. Todo `.cmd` tiene botón **Copiar** automático.
 
 ## Calculadora
 
 ```html
 <div class="tool">
-  <h3>¿Cuánto X necesito?</h3>
-  <div class="row"><label class="field" for="nItems">Número de …
-    <input id="nItems" type="number" min="1" step="1" value="70" inputmode="numeric"></label></div>
-  <div class="result" aria-live="polite">
-    <div><b id="outA">—</b><span>Etiqueta</span></div>
-  </div>
-  <p class="fine">De dónde salen los números.</p>
+  <h3>< título de la herramienta ></h3>
+  <label class="field" for="entrada"><etiqueta verificada>
+    <input id="entrada" type="number" min="<mínimo verificado>" step="<paso verificado>"></label>
+  <div class="result" aria-live="polite"><b id="salida">—</b></div>
+  <p class="fine">Explica el origen de la fórmula y sus límites.</p>
 </div>
-<script>
-(function(){ var n=document.getElementById("nItems"); if(!n) return;
-  var calc=function(){ var v=Math.max(0, parseInt(n.value,10)||0);
-    document.getElementById("outA").textContent = Math.ceil(v*0.175) + " GB"; };
-  n.addEventListener("input", calc); calc(); })();
-</script>
 ```
+
+Implementa el cálculo solo con una fórmula confirmada por el proyecto o por la
+persona usuaria; no copies valores ni unidades de ejemplos externos.
 
 ## Trampas silenciosas (admin)
 
@@ -84,7 +76,8 @@ tiene botón **Copiar** automático.
 
 ## Otros
 
-- Teclas: `<kbd>Ctrl</kbd> + <kbd>C</kbd>`.
-- Etiqueta de versión: `<span class="ver">v2</span>`.
+- Teclas: usa etiquetas `<kbd>` y adapta la combinación al sistema operativo
+  objetivo confirmado.
+- Etiqueta de versión: `<span class="ver">{versión verificada}</span>`.
 - Sección: `<section id="slug"><p class="eyebrow">Sección N · cuándo</p><h2>…</h2>…</section>`
   y su `<li><a data-n="N" href="#slug">…</a></li>` en el índice.

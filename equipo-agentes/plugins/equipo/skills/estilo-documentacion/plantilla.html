@@ -4,46 +4,44 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{{Proyecto}} · Manual de {{rol}}</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
 <style>
 [hidden]{display:none!important}img{max-width:100%}
 /* Layout: sidebar índice fijo + columna de lectura; en móvil, barra superior con índice plegable.
-   Color: marca Sunshine Bouquet — turquesa #00AFAA y fucsia #E04B9B (rellenos); variantes oscuras para texto legible. */
+   Colores neutrales de ejemplo; reemplázalos solo por identidad visual local confirmada. */
 :root{
-  --brand:#00afaa; --brand-pink:#e04b9b;
-  --bg:#f5f9f9; --surface:#ffffff; --sunk:#e6f2f1; --line:#cfe1e0;
-  --fg:#16302f; --muted:#52706e;
-  --leaf:#00807c; --leaf-soft:#d6f1ef;
-  --rose:#b9307a; --rose-soft:#fbe5f1;
-  --warn:#8a5a00; --warn-soft:#fbf0d9;
-  --ok:#00807c; --ok-soft:#e0f4f2;
-  --code-bg:#12302f; --code-fg:#e3f3f2;
-  --f-display:"Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-  --f-body:"Source Sans 3", "Segoe UI", system-ui, sans-serif;
-  --f-mono:"JetBrains Mono", Consolas, "Cascadia Mono", monospace;
+  --brand:#35627a; --brand-pink:#a55445;
+  --bg:#f7f8fa; --surface:#ffffff; --sunk:#edf0f4; --line:#d5dbe3;
+  --fg:#202833; --muted:#5f6b78;
+  --leaf:#35627a; --leaf-soft:#e3edf2;
+  --rose:#a55445; --rose-soft:#f5e9e6;
+  --warn:#795400; --warn-soft:#fbf2d9;
+  --ok:#356b50; --ok-soft:#e4f0e9;
+  --code-bg:#202833; --code-fg:#eef2f6;
+  --f-display:system-ui, sans-serif;
+  --f-body:system-ui, sans-serif;
+  --f-mono:ui-monospace, Consolas, monospace;
   --radius:10px;
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --brand:#2cc6c0; --brand-pink:#ec6cb0; --bg:#0e1a1a; --surface:#142424; --sunk:#1a2e2e; --line:#294443;
-    --fg:#e1f0ef; --muted:#93b4b2;
-    --leaf:#45d3cd; --leaf-soft:#123b39;
-    --rose:#f287c0; --rose-soft:#3a1a2d;
+    --brand:#72afca; --brand-pink:#df9a8c; --bg:#151a20; --surface:#202833; --sunk:#293341; --line:#3c4856;
+    --fg:#edf1f5; --muted:#aeb8c3;
+    --leaf:#72afca; --leaf-soft:#263b49;
+    --rose:#df9a8c; --rose-soft:#432c2a;
     --warn:#e8b65a; --warn-soft:#352a14;
-    --ok:#45d3cd; --ok-soft:#133230;
-    --code-bg:#081414; --code-fg:#d9eeed;
+    --ok:#80bd98; --ok-soft:#253b2d;
+    --code-bg:#11161c; --code-fg:#edf1f5;
     color-scheme:dark;
   }
 }
 :root[data-theme="dark"]{
-  --brand:#2cc6c0; --brand-pink:#ec6cb0; --bg:#0e1a1a; --surface:#142424; --sunk:#1a2e2e; --line:#294443;
-  --fg:#e1f0ef; --muted:#93b4b2;
-  --leaf:#45d3cd; --leaf-soft:#123b39;
-  --rose:#f287c0; --rose-soft:#3a1a2d;
+  --brand:#72afca; --brand-pink:#df9a8c; --bg:#151a20; --surface:#202833; --sunk:#293341; --line:#3c4856;
+  --fg:#edf1f5; --muted:#aeb8c3;
+  --leaf:#72afca; --leaf-soft:#263b49;
+  --rose:#df9a8c; --rose-soft:#432c2a;
   --warn:#e8b65a; --warn-soft:#352a14;
-  --ok:#45d3cd; --ok-soft:#133230;
-  --code-bg:#081414; --code-fg:#d9eeed;
+  --ok:#80bd98; --ok-soft:#253b2d;
+  --code-bg:#11161c; --code-fg:#edf1f5;
   color-scheme:dark;
 }
 *{box-sizing:border-box}
@@ -69,10 +67,7 @@ a{color:var(--leaf)}
 .toc a.active{background:var(--leaf-soft);color:var(--fg);font-weight:600}
 .toc a.active::before{color:var(--leaf)}
 .mobilebar{display:none}
-.logo{display:block;aspect-ratio:720/207;background:url(img/logo_sunshine_bouquet.png) no-repeat center/contain}
-.brand .logo{width:200px;max-width:100%;margin-bottom:18px}
 .lockup{display:flex;align-items:center;gap:10px;min-width:0}
-.mobilebar .logo{width:118px;flex:none}
 
 main{padding-block:28px 80px;min-width:0}
 section{padding-top:24px;scroll-margin-top:16px}
@@ -186,12 +181,12 @@ footer{margin-top:60px;font-size:.85rem;color:var(--muted)}
 .shot figcaption{font-size:.88rem;color:var(--muted);margin-top:6px;max-width:72ch}
 .shots{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px 16px;align-items:start;margin:16px 0}
 .shots .shot{margin:0}
-.n{display:inline-grid;place-items:center;min-width:1.4em;height:1.4em;padding:0 .3em;border-radius:99px;background:#d23b8c;color:#fff;font:700 .74rem/1 var(--f-body);vertical-align:.12em}
+.n{display:inline-grid;place-items:center;min-width:1.4em;height:1.4em;padding:0 .3em;border-radius:99px;background:var(--brand-pink);color:#fff;font:700 .74rem/1 var(--f-body);vertical-align:.12em}
 dialog.lb{padding:0;border:0;background:transparent;max-width:96vw;max-height:94vh}
 dialog.lb::backdrop{background:rgba(0,0,0,.78)}
 dialog.lb img{display:block;max-width:96vw;max-height:88vh;width:auto;height:auto;border-radius:8px;background:#fff}
 dialog.lb p{margin:8px 0 0;color:#fff;font-size:.9rem;text-align:center}
-dialog.lb button{position:fixed;top:12px;right:12px;font:600 .9rem var(--f-body);background:#fff;color:#16302f;border:0;border-radius:8px;padding:6px 12px;cursor:pointer}
+ dialog.lb button{position:fixed;top:12px;right:12px;font:600 .9rem var(--f-body);background:var(--surface);color:var(--fg);border:0;border-radius:8px;padding:6px 12px;cursor:pointer}
 
 @media (max-width: 900px){
   .shell{grid-template-columns:minmax(0,1fr);gap:0}
@@ -212,7 +207,7 @@ dialog.lb button{position:fixed;top:12px;right:12px;font:600 .9rem var(--f-body)
 
 <div class="shell" data-ns="{{ns}}">
   <nav class="toc" id="toc" aria-label="Índice">
-    <p class="brand"><span class="logo" role="img" aria-label="Sunshine Bouquet"></span>{{Proyecto}}<small>Manual de {{rol}}</small></p>
+    <p class="brand">{{Proyecto}}<small>Manual de {{rol}}</small></p>
     <ol>
       <li><a data-n="0" href="#que-es">¿Qué es esto?</a></li>
       <li><a data-n="1" href="#antes">Antes de empezar</a></li>
@@ -223,7 +218,7 @@ dialog.lb button{position:fixed;top:12px;right:12px;font:600 .9rem var(--f-body)
   </nav>
 
   <main>
-    <div class="mobilebar"><span class="lockup"><span class="logo" role="img" aria-label="Sunshine Bouquet"></span><b>{{Proyecto}}</b></span><button type="button" id="tocBtn" aria-expanded="false" aria-controls="toc">Índice</button></div>
+    <div class="mobilebar"><span class="lockup"><b>{{Proyecto}}</b></span><button type="button" id="tocBtn" aria-expanded="false" aria-controls="toc">Índice</button></div>
 
     <section id="que-es">
       <p class="eyebrow">Manual de {{rol}}</p>
@@ -287,10 +282,10 @@ dialog.lb button{position:fixed;top:12px;right:12px;font:600 .9rem var(--f-body)
       <ul>
         <li>{{Situación concreta}}</li>
       </ul>
-      <div class="note tip"><b class="tag">Tip</b><p>Cuando avises, copia el mensaje exacto o haz una captura con <kbd>Win</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>.</p></div>
+      <div class="note tip"><b class="tag">Tip</b><p>Al reportar el problema, copia el mensaje exacto o adjunta una captura realizada con la herramienta disponible en tu sistema.</p></div>
     </section>
 
-    <footer>Sunshine Bouquet · {{Proyecto}} · manual de {{rol}} · revisión {{dd-mm-aaaa}}.</footer>
+    <footer>{{Proyecto}} · manual de {{rol}} · revisión {{dd-mm-aaaa}}.</footer>
   </main>
 </div>
 
@@ -301,7 +296,7 @@ window.ERR = [
 ];
 (function(){
   var shell = document.querySelector(".shell");
-  var NS = (shell && shell.dataset.ns) || "cr";
+  var NS = (shell && shell.dataset.ns) || "manual";
   var store = {
     get: function(k){ try { return JSON.parse(localStorage.getItem(NS + ":" + k)); } catch(e){ return null; } },
     set: function(k, v){ try { localStorage.setItem(NS + ":" + k, JSON.stringify(v)); } catch(e){} }
@@ -319,7 +314,7 @@ window.ERR = [
       var fallback = function(){
         var r = document.createRange(); r.selectNodeContents(pre);
         var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
-        b.textContent = "Pulsa Ctrl+C";
+        b.textContent = "Selecciona y copia";
         setTimeout(function(){ b.textContent = "Copiar"; }, 2500);
       };
       try {
@@ -330,10 +325,8 @@ window.ERR = [
     box.appendChild(b);
   });
 
-  // Checklists con progreso. Las listas con data-por-finca se guardan por finca.
-  function fincaCode(){ var i = $("fFinca"); return (i && i.value.trim().toLowerCase().replace(/\s+/g, "")) || "general"; }
-  function listEl(name){ return document.querySelector('[data-list="' + name + '"]'); }
-  function key(name){ var l = listEl(name); return l && l.hasAttribute("data-por-finca") ? name + ":" + fincaCode() : name; }
+  // Checklists con progreso, aisladas por el identificador del manual.
+  function key(name){ return name; }
   function boxes(name){ return Array.from(document.querySelectorAll('[data-list="' + name + '"] input[type=checkbox]')); }
   function paint(name){
     var bs = boxes(name), n = bs.filter(function(b){ return b.checked; }).length;

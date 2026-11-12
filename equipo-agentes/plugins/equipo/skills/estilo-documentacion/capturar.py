@@ -1,4 +1,4 @@
-"""Capturas anotadas para los manuales (estilo Conteo Rosas).
+"""Capturas anotadas para manuales a partir de una especificación local.
 
 Lee una especificación JSON (por convención `manual/capturas.json`), abre cada
 pantalla con Playwright, dibuja un recuadro rosa y un círculo numerado sobre

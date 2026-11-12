@@ -1,6 +1,6 @@
 ---
 name: documentar
-description: Genera o actualiza la documentación para personas de un proyecto (manual de usuario, de administrador o README) con el estilo del manual de Conteo Rosas, vía el subagente documentador. Úsalo cuando el usuario pida documentar, hacer un manual, una guía o un README, o actualizar la documentación tras un cambio.
+description: Genera o actualiza documentación para personas del proyecto seleccionado con el agente documentador. Úsalo cuando se pida un manual, guía, README o actualizar documentación tras un cambio.
 argument-hint: <proyecto> [usuario|admin|readme|actualizar]
 ---
 
