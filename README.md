@@ -36,6 +36,8 @@ carpeta se usa como nombre del nodo y su estado es `new`. Las relaciones se
 declaran en el frontmatter `relationships` de las fichas. Los JSON bajo `deps/`
 se usan para mostrar dependencias internas; ambos directorios pueden cambiarse
 con `--projects-dir` y `--deps-dir`.
+Si varias carpetas coinciden tras normalizar sus nombres, se conservan como
+nodos separados usando el nombre original para distinguirlos.
 
 El escaneo es superficial intencionadamente: cada subcarpeta directa es un
 nodo, no se deducen relaciones automáticamente ni se recorren subcarpetas

@@ -94,9 +94,16 @@ def cargar_proyectos(raiz, carpeta_projects):
             continue
         ficha = fichas.get(normalizar(carpeta.name))
         pid, fm, cuerpo = ficha if ficha else (carpeta.name, {}, "")
+        conflicto_id = pid in proyectos
+        if conflicto_id:
+            pid = carpeta.name
+            sufijo = 2
+            while pid in proyectos:
+                pid = f"{carpeta.name} ({sufijo})"
+                sufijo += 1
         proyectos[pid] = {
             "id": pid,
-            "name": fm.get("name", carpeta.name),
+            "name": carpeta.name if conflicto_id else fm.get("name", carpeta.name),
             "status": fm.get("status", "new"),
             "stack": fm.get("stack", []) if isinstance(fm.get("stack"), list) else [],
             "tags": fm.get("tags", []) if isinstance(fm.get("tags"), list) else [],
